@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.SpecialMallMapper" >
+  <resultMap id="BaseResultMap" type="com.quxin.freshfun.model.specialmall.SpecialMallPOJO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="BIGINT" />
+    <result column="mall_img" property="mallImg" jdbcType="VARCHAR" />
+    <result column="mall_info_img" property="mallInfoImg" jdbcType="VARCHAR" />
+    <result column="mall_content" property="mallContent" jdbcType="VARCHAR" />
+    <result column="mall_info_content" property="mallInfoContent" jdbcType="VARCHAR" />
+    <result column="mall_des" property="mallDes" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="reserved_field" property="reservedField" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, gmt_create, gmt_modified, mall_img, mall_info_img, mall_content, mall_info_content, 
+    mall_des, is_deleted, reserved_field
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from special_mall
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findCount" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from special_mall
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from special_mall
+    where true
+    <if test="begin!=null">
+    	limit #{begin},#{pageSize}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from special_mall
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.quxin.freshfun.model.specialmall.SpecialMallPOJO" >
+    insert into special_mall (id, gmt_create, gmt_modified, 
+      mall_img, mall_info_img, mall_content, 
+      mall_info_content, mall_des, is_deleted, 
+      reserved_field)
+    values (#{id,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT}, 
+      #{mallImg,jdbcType=VARCHAR}, #{mallInfoImg,jdbcType=VARCHAR}, #{mallContent,jdbcType=VARCHAR}, 
+      #{mallInfoContent,jdbcType=VARCHAR}, #{mallDes,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+      #{reservedField,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.quxin.freshfun.model.specialmall.SpecialMallPOJO" >
+    insert into special_mall
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="mallImg != null" >
+        mall_img,
+      </if>
+      <if test="mallInfoImg != null" >
+        mall_info_img,
+      </if>
+      <if test="mallContent != null" >
+        mall_content,
+      </if>
+      <if test="mallInfoContent != null" >
+        mall_info_content,
+      </if>
+      <if test="mallDes != null" >
+        mall_des,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="reservedField != null" >
+        reserved_field,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=BIGINT},
+      </if>
+      <if test="mallImg != null" >
+        #{mallImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mallInfoImg != null" >
+        #{mallInfoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mallContent != null" >
+        #{mallContent,jdbcType=VARCHAR},
+      </if>
+      <if test="mallInfoContent != null" >
+        #{mallInfoContent,jdbcType=VARCHAR},
+      </if>
+      <if test="mallDes != null" >
+        #{mallDes,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="reservedField != null" >
+        #{reservedField,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.quxin.freshfun.model.specialmall.SpecialMallPOJO" >
+    update special_mall
+    <set >
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=BIGINT},
+      </if>
+      <if test="mallImg != null" >
+        mall_img = #{mallImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mallInfoImg != null" >
+        mall_info_img = #{mallInfoImg,jdbcType=VARCHAR},
+      </if>
+      <if test="mallContent != null" >
+        mall_content = #{mallContent,jdbcType=VARCHAR},
+      </if>
+      <if test="mallInfoContent != null" >
+        mall_info_content = #{mallInfoContent,jdbcType=VARCHAR},
+      </if>
+      <if test="mallDes != null" >
+        mall_des = #{mallDes,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="reservedField != null" >
+        reserved_field = #{reservedField,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.quxin.freshfun.model.specialmall.SpecialMallPOJO" >
+    update special_mall
+    set gmt_create = #{gmtCreate,jdbcType=BIGINT},
+      gmt_modified = #{gmtModified,jdbcType=BIGINT},
+      mall_img = #{mallImg,jdbcType=VARCHAR},
+      mall_info_img = #{mallInfoImg,jdbcType=VARCHAR},
+      mall_content = #{mallContent,jdbcType=VARCHAR},
+      mall_info_content = #{mallInfoContent,jdbcType=VARCHAR},
+      mall_des = #{mallDes,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      reserved_field = #{reservedField,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

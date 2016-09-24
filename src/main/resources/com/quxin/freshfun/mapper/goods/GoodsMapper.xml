@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.GoodsMapper">
+	<resultMap id="BaseResultMap" type="com.quxin.freshfun.model.goods.GoodsPOJO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="BIGINT" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="goods_des" property="goodsDes" jdbcType="VARCHAR" />
+		<result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+		<result column="shop_price" property="shopPrice" jdbcType="INTEGER" />
+		<result column="market_price" property="marketPrice" jdbcType="INTEGER" />
+		<result column="store_id" property="storeId" jdbcType="INTEGER" />
+		<result column="goods_weight" property="goodsWeight" jdbcType="INTEGER" />
+		<result column="goods_storage" property="goodsStorage"
+			jdbcType="INTEGER" />
+		<result column="warnning" property="warnning" jdbcType="TINYINT" />
+		<result column="is_on_sale" property="isOnSale" jdbcType="TINYINT" />
+		<result column="is_new" property="isNew" jdbcType="TINYINT" />
+		<result column="is_hot" property="isHot" jdbcType="TINYINT" />
+		<result column="is_promote" property="isPromote" jdbcType="TINYINT" />
+		<result column="reserved_field" property="reservedField"
+			jdbcType="VARCHAR" />
+		<result column="merchant_proxy_id" property="merchantProxyId"
+			jdbcType="BIGINT" />
+		<result column="share_url" property="shareUrl" jdbcType="VARCHAR" />	
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, gmt_create, gmt_modified, goods_name, goods_des,
+		goods_img,
+		goods_type, shop_price,
+		market_price, store_id, goods_weight,
+		goods_storage, warnning, is_on_sale, is_new,
+		is_hot, is_promote,
+		reserved_field ,merchant_proxy_id ,share_url 
+	</sql>
+	<select id="getGoodsById" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectGoodsById" parameterType="java.lang.Integer" resultType="com.quxin.freshfun.model.goods.GoodsPOJO">
+      select <include refid="Base_Column_List" /> from goods where id = #{goodsId}
+	</select>
+	
+	<!-- 根据商品id查询类型id -->
+	<select id="getGoodsTypeIdsByGoodsId" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select goods_type_id
+		from gtype_vs_gid
+		where goods_id = #{id}
+	</select>
+
+	<select id="findAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		<where>
+			<if test="goodsName !=null">
+				goods_name like '%${goodsName}%'
+			</if>
+			<if test="storeId != null">
+				and store_id = #{storeId}
+			</if>
+			<if test="gmtCreate !=null">
+				and gmt_create <![CDATA[>]]>
+				#{gmtCreate}
+			</if>
+		</where>
+		<if test=" start != null and pageSize !=null">
+			limit #{start} , #{pageSize}
+		</if>
+	</select>
+
+	<select id="total" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from goods
+		<where>
+			<if test="goodsName !=null">
+				goods_name like '%${goodsName}%'
+			</if>
+			<if test="storeId != null">
+				and store_id = #{storeId}
+			</if>
+			<if test="gmtCreate !=null">
+				and gmt_create <![CDATA[>]]>
+				#{gmtCreate}
+			</if>
+		</where>
+	</select>
+
+
+
+	<insert id="save" parameterType="com.quxin.freshfun.model.goods.GoodsPOJO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified,
+			</if>
+			<if test="goodsName != null">
+				goods_name,
+			</if>
+			<if test="goodsDes != null">
+				goods_des,
+			</if>
+			<if test="goodsImg != null">
+				goods_img,
+			</if>
+			<if test="goodsType != null">
+				goods_type,
+			</if>
+			<if test="shopPrice != null">
+				shop_price,
+			</if>
+			<if test="marketPrice != null">
+				market_price,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="goodsWeight != null">
+				goods_weight,
+			</if>
+			<if test="goodsStorage != null">
+				goods_storage,
+			</if>
+			<if test="warnning != null">
+				warnning,
+			</if>
+			<if test="isOnSale != null">
+				is_on_sale,
+			</if>
+			<if test="isNew != null">
+				is_new,
+			</if>
+			<if test="isHot != null">
+				is_hot,
+			</if>
+			<if test="isPromote != null">
+				is_promote,
+			</if>
+			<if test="reservedField != null">
+				reserved_field,
+			</if>
+			<if test="merchantProxyId != null">
+				merchant_proxy_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="goodsName != null">
+				#{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsDes != null">
+				#{goodsDes,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsImg != null">
+				#{goodsImg,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsType != null">
+				#{goodsType,jdbcType=VARCHAR},
+			</if>
+			<if test="shopPrice != null">
+				#{shopPrice,jdbcType=INTEGER},
+			</if>
+			<if test="marketPrice != null">
+				#{marketPrice,jdbcType=INTEGER},
+			</if>
+			<if test="storeId != null">
+				#{storeId,jdbcType=INTEGER},
+			</if>
+			<if test="goodsWeight != null">
+				#{goodsWeight,jdbcType=INTEGER},
+			</if>
+			<if test="goodsStorage != null">
+				#{goodsStorage,jdbcType=INTEGER},
+			</if>
+			<if test="warnning != null">
+				#{warnning,jdbcType=TINYINT},
+			</if>
+			<if test="isOnSale != null">
+				#{isOnSale,jdbcType=TINYINT},
+			</if>
+			<if test="isNew != null">
+				#{isNew,jdbcType=TINYINT},
+			</if>
+			<if test="isHot != null">
+				#{isHot,jdbcType=TINYINT},
+			</if>
+			<if test="isPromote != null">
+				#{isPromote,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				#{reservedField,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantProxyId != null">
+				#{merchantProxyId},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.quxin.freshfun.model.goods.GoodsPOJO">
+		update goods
+		<set>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="goodsName != null">
+				goods_name = #{goodsName,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsDes != null">
+				goods_des = #{goodsDes,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsImg != null">
+				goods_img = #{goodsImg,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsType != null">
+				goods_type = #{goodsType,jdbcType=VARCHAR},
+			</if>
+			<if test="shopPrice != null">
+				shop_price = #{shopPrice,jdbcType=INTEGER},
+			</if>
+			<if test="marketPrice != null">
+				market_price = #{marketPrice,jdbcType=INTEGER},
+			</if>
+			<if test="storeId != null">
+				store_id = #{storeId,jdbcType=INTEGER},
+			</if>
+			<if test="goodsWeight != null">
+				goods_weight = #{goodsWeight,jdbcType=INTEGER},
+			</if>
+			<if test="goodsStorage != null">
+				goods_storage = #{goodsStorage,jdbcType=INTEGER},
+			</if>
+			<if test="warnning != null">
+				warnning = #{warnning,jdbcType=TINYINT},
+			</if>
+			<if test="isOnSale != null">
+				is_on_sale = #{isOnSale,jdbcType=TINYINT},
+			</if>
+			<if test="isNew != null">
+				is_new = #{isNew,jdbcType=TINYINT},
+			</if>
+			<if test="isHot != null">
+				is_hot = #{isHot,jdbcType=TINYINT},
+			</if>
+			<if test="isPromote != null">
+				is_promote = #{isPromote,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				reserved_field = #{reservedField,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantProxyId != null">
+				merchant_proxy_id = #{merchantProxyId},
+			</if>
+			<if test="shareUrl != null">
+				share_url = #{shareUrl},
+			</if>
+			
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+	<!-- ==========================自定义====================================== -->
+	<!-- 插入关联表 -->
+	<insert id="insertGoodAndType" parameterType="com.quxin.freshfun.model.goods.GoodAndType">
+		insert into
+		gtype_vs_gid(goods_id , goods_type_id)
+		values(#{goodId},#{typeId})
+	</insert>
+
+	<!-- 修改状态为下架 -->
+	<update id="removeGood" parameterType="java.lang.Integer">
+		update goods set
+		is_on_sale = 0 where id=#{id}
+	</update>
+	
+	<!-- 修改状态为上架 -->
+	<update id="grounding" parameterType="java.lang.Integer">
+		update goods set
+		is_on_sale = 1 where id=#{id}
+	</update>
+
+	<!-- 删除关联关系 -->
+	<delete id="deleteTypes">
+		delete from gtype_vs_gid where goods_id = #{id}
+	</delete>
+
+	<select id="getTotalGoodsName" parameterType="java.util.Map"
+		resultType="Integer">
+		select count(*) from goods where goods_name = #{goodsName}
+		<if test="id !=null">
+			and id != #{id}
+		</if>
+	</select>
+
+
+
+
+	<select id="findSpecialGoods" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		where true
+		<if test="stId!=null">
+			AND id in (select goods_id from stid_vs_gid where
+			theme_id=#{stId,jdbcType=INTEGER})
+		</if>
+		<if test="begin!=null">
+			limit
+			#{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	<select id="findActivityGoods" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		where true
+		<if test="atId!=null">
+			AND id in (select goods_id from activity_vs_gid where
+			activity_id=#{atId,jdbcType=INTEGER})
+		</if>
+		<if test="begin!=null">
+			limit
+			#{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	<select id="findSpecialMallGoods" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		where true
+		<if test="smId!=null">
+			AND id in (select goods_id from smid_vs_gid where
+			mall_id=#{smId,jdbcType=INTEGER})
+		</if>
+		<if test="begin!=null">
+			limit
+			#{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	<select id="findTypeGoods" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		where true
+		<if test="gtId!=null">
+			AND id in (select goods_id from gtype_vs_gid where
+			goods_type_id=#{gtId,jdbcType=INTEGER})
+		</if>
+		<if test="begin!=null">
+			limit
+			#{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+
+
+
+	<select id="findProxyGoods" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from goods
+		where true
+		<if test="mpId!=null">
+			AND id in (select goods_id from proxy_info where
+			merchant_proxy_id=#{mpId})
+		</if>
+		<if test="begin!=null">
+			limit
+			#{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- =======================================查询销量======================================================== -->
+	<select id="getLastSales" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(id) from order_details where pay_status = 1
+		and
+		DATE_FORMAT(FROM_UNIXTIME(pay_time),'%Y-%m') =
+		date_format(DATE_SUB(curdate(), INTERVAL 1 MONTH),'%Y-%m')
+		and goods_id
+		= #{goodsId}
+	</select>
+
+
+	<select id="getAllSales" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(id) from order_details where pay_status = 1
+		and goods_id = #{goodsId}
+	</select>
+
+	<!-- =======================================插入精选图片======================================================== -->
+	
+	<insert id="insertGoodsSelection" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+		insert into goods_selection(goods_id,image_url,gmt_create,gmt_modified) 
+		values(#{goodsId},#{goodsSelectionPic},#{gmtCreate},#{gmtModified})
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

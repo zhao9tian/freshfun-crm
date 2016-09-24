@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.GoodsReationMapper" >
+  <resultMap id="BaseResultMap" type="com.quxin.freshfun.model.goods.GoodsRelationPOJO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="banner_ids" property="bannerIds" jdbcType="VARCHAR" />
+    <result column="theme_ids" property="themeIds" jdbcType="VARCHAR" />
+    <result column="type_ids" property="typeIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goods_id, banner_ids, theme_ids, type_ids
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectGoodsRelationByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_relation
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="delGoodsRelation" parameterType="java.lang.Integer" >
+    delete from goods_relation
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.quxin.freshfun.model.goods.GoodsRelationPOJO" >
+    insert into goods_relation (id, goods_id, banner_ids, 
+      theme_ids, type_ids)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{bannerIds,jdbcType=VARCHAR}, 
+      #{themeIds,jdbcType=VARCHAR}, #{typeIds,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.quxin.freshfun.model.goods.GoodsRelationPOJO" >
+    insert into goods_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="bannerIds != null" >
+        banner_ids,
+      </if>
+      <if test="themeIds != null" >
+        theme_ids,
+      </if>
+      <if test="typeIds != null" >
+        type_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="bannerIds != null" >
+        #{bannerIds,jdbcType=VARCHAR},
+      </if>
+      <if test="themeIds != null" >
+        #{themeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="typeIds != null" >
+        #{typeIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.quxin.freshfun.model.goods.GoodsRelationPOJO" >
+    update goods_relation
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="bannerIds != null" >
+        banner_ids = #{bannerIds,jdbcType=VARCHAR},
+      </if>
+      <if test="themeIds != null" >
+        theme_ids = #{themeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="typeIds != null" >
+        type_ids = #{typeIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.quxin.freshfun.model.goods.GoodsRelationPOJO" >
+    update goods_relation
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      banner_ids = #{bannerIds,jdbcType=VARCHAR},
+      theme_ids = #{themeIds,jdbcType=VARCHAR},
+      type_ids = #{typeIds,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.SpecialThemeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.quxin.freshfun.model.specialtheme.SpecialThemePOJO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="theme_des" property="themeDes" jdbcType="VARCHAR" />
+		<result column="theme_img" property="themeImg" jdbcType="VARCHAR" />
+		<result column="theme_info_img" property="themeInfoImg"
+			jdbcType="VARCHAR" />
+		<result column="theme_content" property="themeContent"
+			jdbcType="VARCHAR" />
+		<result column="theme_info_content" property="themeInfoContent"
+			jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="BIGINT" />
+		<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+		<result column="reserved_field" property="reservedField"
+			jdbcType="VARCHAR" />
+		<result column="share_url" property="shareUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, theme_des, theme_img, theme_info_img, theme_content,
+		theme_info_content, gmt_create,
+		gmt_modified, is_deleted, reserved_field,share_url
+	</sql>
+	<!-- 根据Id获取实体类 -->
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from special_theme
+		where id = #{id}
+	</select>
+
+	<select id="findAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from special_theme
+		where true
+		<if test="begin!=null">
+			limit #{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<insert id="insert"
+		parameterType="com.quxin.freshfun.model.specialtheme.SpecialThemePOJO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into special_theme
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="themeDes != null">
+				theme_des,
+			</if>
+			<if test="themeImg != null">
+				theme_img,
+			</if>
+			<if test="themeInfoImg != null">
+				theme_info_img,
+			</if>
+			<if test="themeContent != null">
+				theme_content,
+			</if>
+			<if test="themeInfoContent != null">
+				theme_info_content,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="reservedField != null">
+				reserved_field,
+			</if>
+			<if test="shareUrl != null">
+				share_url,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="themeDes != null">
+				#{themeDes,jdbcType=VARCHAR},
+			</if>
+			<if test="themeImg != null">
+				#{themeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="themeInfoImg != null">
+				#{themeInfoImg,jdbcType=VARCHAR},
+			</if>
+			<if test="themeContent != null">
+				#{themeContent,jdbcType=VARCHAR},
+			</if>
+			<if test="themeInfoContent != null">
+				#{themeInfoContent,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				#{reservedField,jdbcType=VARCHAR},
+			</if>
+			<if test="shareUrl != null">
+				#{shareUrl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update"
+		parameterType="com.quxin.freshfun.model.specialtheme.SpecialThemePOJO">
+		update special_theme
+		<set>
+			<if test="themeDes != null">
+				theme_des = #{themeDes,jdbcType=VARCHAR},
+			</if>
+			<if test="themeImg != null">
+				theme_img = #{themeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="themeInfoImg != null">
+				theme_info_img = #{themeInfoImg,jdbcType=VARCHAR},
+			</if>
+			<if test="themeContent != null">
+				theme_content = #{themeContent,jdbcType=VARCHAR},
+			</if>
+			<if test="themeInfoContent != null">
+				theme_info_content = #{themeInfoContent,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				reserved_field = #{reservedField,jdbcType=VARCHAR},
+			</if>
+			<if test="shareUrl != null">
+				 share_url= #{shareUrl,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 逻辑删除专题 -->
+	<update id="removeSpecialTheme">
+		update special_theme 
+		<set>
+			id = #{id}
+			<if test="is_deleted != null">
+				is_deleted = 1
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.OrdersMapper">
+	<resultMap id="BaseResultMap" type="com.quxin.freshfun.model.orders.OrdersPOJO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="order_id" property="orderId" jdbcType="BIGINT" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="payment_method" property="paymentMethod"
+			jdbcType="TINYINT" />
+		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
+		<result column="order_status" property="orderStatus" jdbcType="TINYINT" />
+		<result column="pay_status" property="payStatus" jdbcType="TINYINT" />
+		<result column="user_red_id" property="userRedId" jdbcType="VARCHAR" />
+		<result column="actual_price" property="actualPrice" jdbcType="INTEGER" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+		<result column="reserved_field" property="reservedField"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, order_id, gmt_create, gmt_modified, user_id,
+		payment_method,
+		order_count, order_status,
+		pay_status, user_red_id,
+		actual_price, code, is_deleted, reserved_field
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from orders
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+
+	<select id="findByGoodsId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from orders
+		where gId = #{goodsId,jdbcType=INTEGER}
+	</select>
+	
+	
+	<select id="findSalesByGoodsId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from orders
+		where gId = #{goodsId,jdbcType=INTEGER}
+	</select>
+	
+	
+	
+
+
+
+	<select id="findAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from orders
+		<where>
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=BIGINT},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="paymentMethod != null">
+				#{paymentMethod,jdbcType=TINYINT},
+			</if>
+			<if test="orderCount != null">
+				#{orderCount,jdbcType=INTEGER},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=TINYINT},
+			</if>
+			<if test="payStatus != null">
+				#{payStatus,jdbcType=TINYINT},
+			</if>
+			<if test="userRedId != null">
+				#{userRedId,jdbcType=VARCHAR},
+			</if>
+			<if test="actualPrice != null">
+				#{actualPrice,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				#{reservedField,jdbcType=VARCHAR},
+			</if>
+		</where>
+	</select>
+
+
+
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from orders
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.quxin.freshfun.model.orders.OrdersPOJO">
+		insert into orders (id,
+		order_id, gmt_create,
+		gmt_modified, user_id, payment_method,
+		order_count, order_status, pay_status,
+		user_red_id, actual_price, code,
+		is_deleted, reserved_field)
+		values (#{id,jdbcType=INTEGER},
+		#{orderId,jdbcType=BIGINT},
+		#{gmtCreate,jdbcType=BIGINT},
+		#{gmtModified,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{paymentMethod,jdbcType=TINYINT},
+		#{orderCount,jdbcType=INTEGER},
+		#{orderStatus,jdbcType=TINYINT},
+		#{payStatus,jdbcType=TINYINT},
+		#{userRedId,jdbcType=VARCHAR}, #{actualPrice,jdbcType=INTEGER},
+		#{code,jdbcType=VARCHAR},
+		#{isDeleted,jdbcType=TINYINT},
+		#{reservedField,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.quxin.freshfun.model.orders.OrdersPOJO">
+		insert into orders
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="paymentMethod != null">
+				payment_method,
+			</if>
+			<if test="orderCount != null">
+				order_count,
+			</if>
+			<if test="orderStatus != null">
+				order_status,
+			</if>
+			<if test="payStatus != null">
+				pay_status,
+			</if>
+			<if test="userRedId != null">
+				user_red_id,
+			</if>
+			<if test="actualPrice != null">
+				actual_price,
+			</if>
+			<if test="code != null">
+				code,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="reservedField != null">
+				reserved_field,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=BIGINT},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="paymentMethod != null">
+				#{paymentMethod,jdbcType=TINYINT},
+			</if>
+			<if test="orderCount != null">
+				#{orderCount,jdbcType=INTEGER},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=TINYINT},
+			</if>
+			<if test="payStatus != null">
+				#{payStatus,jdbcType=TINYINT},
+			</if>
+			<if test="userRedId != null">
+				#{userRedId,jdbcType=VARCHAR},
+			</if>
+			<if test="actualPrice != null">
+				#{actualPrice,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				#{reservedField,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.quxin.freshfun.model.orders.OrdersPOJO">
+		update orders
+		<set>
+			<if test="orderId != null">
+				order_id = #{orderId,jdbcType=BIGINT},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="paymentMethod != null">
+				payment_method = #{paymentMethod,jdbcType=TINYINT},
+			</if>
+			<if test="orderCount != null">
+				order_count = #{orderCount,jdbcType=INTEGER},
+			</if>
+			<if test="orderStatus != null">
+				order_status = #{orderStatus,jdbcType=TINYINT},
+			</if>
+			<if test="payStatus != null">
+				pay_status = #{payStatus,jdbcType=TINYINT},
+			</if>
+			<if test="userRedId != null">
+				user_red_id = #{userRedId,jdbcType=VARCHAR},
+			</if>
+			<if test="actualPrice != null">
+				actual_price = #{actualPrice,jdbcType=INTEGER},
+			</if>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				reserved_field = #{reservedField,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.quxin.freshfun.model.orders.OrdersPOJO">
+		update orders
+		set
+		order_id = #{orderId,jdbcType=BIGINT},
+		gmt_create =
+		#{gmtCreate,jdbcType=BIGINT},
+		gmt_modified =
+		#{gmtModified,jdbcType=BIGINT},
+		user_id = #{userId,jdbcType=BIGINT},
+		payment_method = #{paymentMethod,jdbcType=TINYINT},
+		order_count =
+		#{orderCount,jdbcType=INTEGER},
+		order_status =
+		#{orderStatus,jdbcType=TINYINT},
+		pay_status =
+		#{payStatus,jdbcType=TINYINT},
+		user_red_id =
+		#{userRedId,jdbcType=VARCHAR},
+		actual_price =
+		#{actualPrice,jdbcType=INTEGER},
+		code = #{code,jdbcType=VARCHAR},
+		is_deleted = #{isDeleted,jdbcType=TINYINT},
+		reserved_field =
+		#{reservedField,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

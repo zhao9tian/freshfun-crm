@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.GoodsTypeMapper">
+	<resultMap id="BaseResultMap" type="com.quxin.freshfun.model.goods.GoodsTypePOJO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="BIGINT" />
+		<result column="gmt_modified" property="gmtModified" jdbcType="BIGINT" />
+		<result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+		<result column="goods_type_img" property="goodsTypeImg"
+			jdbcType="VARCHAR" />
+		<result column="goods_info_des" property="goodsInfoDes" jdbcType="VARCHAR" />
+		<result column="goods_info_img" property="goodsInfoImg"
+			jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+		<result column="reserved_field" property="reservedField"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, gmt_create, gmt_modified, goods_type, goods_type_img,goods_info_des,goods_info_img,
+		is_deleted,
+		reserved_field
+	</sql>
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from goods_type
+		where id = #{id,jdbcType=INTEGER} and is_deleted = 0
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		goods_type
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="addGoodsType" parameterType="com.quxin.freshfun.model.goods.GoodsTypePOJO">
+		insert into goods_type
+		(id, gmt_create, gmt_modified,
+		goods_type, goods_type_img,goods_info_des, goods_info_img, is_deleted,
+		reserved_field)
+		values (#{id,jdbcType=INTEGER},
+		#{gmtCreate,jdbcType=BIGINT},
+		#{gmtModified,jdbcType=BIGINT},
+		#{goodsType,jdbcType=VARCHAR}, #{goodsTypeImg,jdbcType=VARCHAR},
+		#{goodsInfoDes,jdbcType=VARCHAR}, #{goodsInfoImg,jdbcType=VARCHAR},
+		#{isDeleted,jdbcType=TINYINT},
+		#{reservedField,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.quxin.freshfun.model.goods.GoodsTypePOJO">
+		insert into goods_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified,
+			</if>
+			<if test="goodsType != null">
+				goods_type,
+			</if>
+			<if test="goodsTypeImg != null">
+				goods_type_img,
+			</if>
+			<if test="goodsInfoDes != null">
+				goods_info_des,
+			</if>
+			<if test="goodsInfoImg != null">
+				goods_info_img,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="reservedField != null">
+				reserved_field,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				#{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="goodsType != null">
+				#{goodsType,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsTypeImg != null">
+				#{goodsTypeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsInfoDes != null">
+				#{goodsInfoDes,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsInfoImg != null">
+				#{goodsInfoImg,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				#{reservedField,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.quxin.freshfun.model.goods.GoodsTypePOJO">
+		update goods_type
+		<set>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=BIGINT},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified,jdbcType=BIGINT},
+			</if>
+			<if test="goodsType != null">
+				goods_type = #{goodsType,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsTypeImg != null">
+				goods_type_img = #{goodsTypeImg,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsInfoDes != null">
+				goods_info_des = #{goodsInfoDes,jdbcType=VARCHAR},
+			</if>
+			<if test="goodsInfoImg != null">
+				goods_info_img = #{goodsInfoImg,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=TINYINT},
+			</if>
+			<if test="reservedField != null">
+				reserved_field = #{reservedField,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateGoodsType" parameterType="com.quxin.freshfun.model.goods.GoodsTypePOJO">
+		update goods_type
+		set
+		gmt_create = #{gmtCreate,jdbcType=BIGINT},
+		gmt_modified =
+		#{gmtModified,jdbcType=BIGINT},
+		goods_type =
+		#{goodsType,jdbcType=VARCHAR},
+		goods_type_img =
+		#{goodsTypeImg,jdbcType=VARCHAR},
+		goods_info_des =
+		#{goodsInfoDes,jdbcType=VARCHAR},
+		goods_info_img =
+		#{goodsInfoImg,jdbcType=VARCHAR},
+		is_deleted =
+		#{isDeleted,jdbcType=TINYINT},
+		reserved_field =
+		#{reservedField,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+	<update id="deleteGoodsType" parameterType="com.quxin.freshfun.model.goods.GoodsTypePOJO">
+		update goods_type
+		set
+		is_deleted = 1
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from goods_type
+	</select>
+
+	<select id="findByPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from goods_type where true
+		<if test="begin!=null">
+			limit
+			#{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+</mapper>
