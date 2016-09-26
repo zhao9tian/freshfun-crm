@@ -1,15 +1,10 @@
 package com.quxin.freshfun.utils;
 
-import java.lang.reflect.Field;  
-import java.lang.reflect.InvocationTargetException;  
-import java.lang.reflect.Method;  
-import java.lang.reflect.ParameterizedType;  
-import java.lang.reflect.Type;  
-  
-import org.apache.commons.lang.StringUtils;  
-import org.slf4j.Logger;  
-import org.slf4j.LoggerFactory;  
-import org.springframework.util.Assert;  
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
+
+import java.lang.reflect.*;
 
 /** 
  * 反射工具类. 
@@ -19,33 +14,33 @@ import org.springframework.util.Assert;
  */  
 public class ReflectionUtils {  
   
-    private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);  
+    private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
   
     /** 
      * 调用Getter方法. 
      */  
-    public static Object invokeGetterMethod(Object obj, String propertyName) {  
-        String getterMethodName = "get" + StringUtils.capitalize(propertyName);  
-        return invokeMethod(obj, getterMethodName, new Class[] {}, new Object[] {});  
-    }  
-  
+//    public static Object invokeGetterMethod(Object obj, String propertyName) {
+//        String getterMethodName = "get" + StringUtils.capitalize(propertyName);
+//        return invokeMethod(obj, getterMethodName, new Class[] {}, new Object[] {});
+//    }
+//
     /** 
      * 调用Setter方法.使用value的Class来查找Setter方法. 
      */  
-    public static void invokeSetterMethod(Object obj, String propertyName, Object value) {  
-        invokeSetterMethod(obj, propertyName, value, null);  
-    }  
+//    public static void invokeSetterMethod(Object obj, String propertyName, Object value) {
+//        invokeSetterMethod(obj, propertyName, value, null);
+//    }
   
     /** 
      * 调用Setter方法. 
      *  
      * @param propertyType 用于查找Setter方法,为空时使用value的Class替代. 
      */  
-    public static void invokeSetterMethod(Object obj, String propertyName, Object value, Class<?> propertyType) {  
-        Class<?> type = propertyType != null ? propertyType : value.getClass();  
-        String setterMethodName = "set" + StringUtils.capitalize(propertyName);  
-        invokeMethod(obj, setterMethodName, new Class[] { type }, new Object[] { value });  
-    }  
+//    public static void invokeSetterMethod(Object obj, String propertyName, Object value, Class<?> propertyType) {
+//        Class<?> type = propertyType != null ? propertyType : value.getClass();
+//        String setterMethodName = "set" + StringUtils.capitalize(propertyName);
+//        invokeMethod(obj, setterMethodName, new Class[] { type }, new Object[] { value });
+//    }
   
     /** 
      * 直接读取对象属性值, 无视private/protected修饰符, 不经过getter函数. 
