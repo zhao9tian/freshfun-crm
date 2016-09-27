@@ -53,11 +53,6 @@
 						<td><%=detail.getGoods().getGoodsName() %></td>
 						<td><%=detail.getGoods().getMarketPrice()/100 %>Ԫ</td>
 						<td><%=detail.getGoods().getShopPrice()/100 %>Ԫ</td>
-					<%}else{ %>
-						<td><img style="width:100px;height:100px;" src="${IMAGEIP}<%=detail.getGoodsLimit().getGoodsImg() %>"/></td>
-						<td><%=detail.getGoodsLimit().getGoodsName() %></td>
-						<td><%=detail.getGoodsLimit().getMarketPrice()/100 %>Ԫ</td>
-						<td><%=detail.getGoodsLimit().getShopPrice()/100 %>Ԫ</td>
 					<%} %>
 					<td><%=detail.getCount() %></td>
 					<td><%=detail.getActualPrice()/100 %>Ԫ</td>

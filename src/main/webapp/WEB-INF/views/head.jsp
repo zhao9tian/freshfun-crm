@@ -24,8 +24,8 @@ a {
 					href="${pageContext.request.contextPath}/goodstype/getGoodsTypeList.do">Type Manager</a></td>
 <%-- 				<td><a href="${pageContext.request.contextPath}/activity/activityList.do">Activity Manager</a></td> --%>
 				<%--<td><a
-					href="${pageContext.request.contextPath}/goodsLimitList.do">Limit Manager</a></td>
-				<td>--%><a
+					href="${pageContext.request.contextPath}/goodsLimitList.do">Limit Manager</a></td>--%>
+				<td><a
 					href="${pageContext.request.contextPath}/specialThemeIndex.do">SpecialTheme Manager</a></td>
 				<td><a
 					href="${pageContext.request.contextPath}/specialMall/getSMList.do">Banner Manager</a></td>

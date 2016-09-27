@@ -23,7 +23,7 @@
 <%@ include file="../head.jsp" %>
 <body>
 		<fieldset>
-		<legend><font style="color:red">Banner操作</font></legend>
+		<legend><font style="color:red">Goods操作</font></legend>
 		<form action="toAddGoods.do" id="addGoods"></form>
 		<input value="新增商品" type="button" onclick="addGoods()"/>
 				<input value="添加选中商品到分类" type="button" onclick="addGoodsTo(1)"/>
