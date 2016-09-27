@@ -1,27 +1,22 @@
 package com.quxin.freshfun.service.impl.order;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.quxin.freshfun.dao.GoodsLimitMapper;
 import com.quxin.freshfun.dao.GoodsMapper;
 import com.quxin.freshfun.dao.OrderDetailsMapper;
 import com.quxin.freshfun.model.goods.GoodsPOJO;
-import com.quxin.freshfun.model.goodslimit.GoodsLimitPOJO;
 import com.quxin.freshfun.model.orders.OrderDetailsPOJO;
 import com.quxin.freshfun.service.order.OrderDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
 	@Autowired
 	private OrderDetailsMapper mapper;
 	@Autowired
 	private GoodsMapper goodsMapper;
-	@Autowired
-	private GoodsLimitMapper goodsLimitMapper;
 
 	@Override
 	public List<OrderDetailsPOJO> findOrderByGoodsId(Integer goodsId) {
@@ -34,16 +29,12 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 		// TODO Auto-generated method stub
 		List<OrderDetailsPOJO> orderDetailsList = mapper.findRetOrder(map);
 		GoodsPOJO goods = null;
-		GoodsLimitPOJO goodsLimit = null;
 		if(orderDetailsList != null){
 			for(OrderDetailsPOJO detail : orderDetailsList){
 				if(detail.getIsLimit()==0){
 					goods = goodsMapper.getGoodsById(detail.getGoodsId());
-				}else{
-					goodsLimit = goodsLimitMapper.getGoodsById(detail.getGoodsId());
 				}
 				detail.setGoods(goods);
-				detail.setGoodsLimit(goodsLimit);
 			}
 		}
 		return orderDetailsList;

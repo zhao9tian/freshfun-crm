@@ -1,7 +1,6 @@
 package com.quxin.freshfun.model.orders;
 
 import com.quxin.freshfun.model.goods.GoodsPOJO;
-import com.quxin.freshfun.model.goodslimit.GoodsLimitPOJO;
 import com.quxin.freshfun.model.user.UsersPOJO;
 
 public class OrderDetailsPOJO {
@@ -50,8 +49,6 @@ public class OrderDetailsPOJO {
     private Integer isLimit;
     
     private GoodsPOJO goods;
-    
-    private GoodsLimitPOJO goodsLimit;
     
     private UsersPOJO user;
 
@@ -250,13 +247,6 @@ public class OrderDetailsPOJO {
 		this.isLimit = isLimit;
 	}
 
-	public GoodsLimitPOJO getGoodsLimit() {
-		return goodsLimit;
-	}
-
-	public void setGoodsLimit(GoodsLimitPOJO goodsLimit) {
-		this.goodsLimit = goodsLimit;
-	}
 
 	public UsersPOJO getUser() {
 		return user;

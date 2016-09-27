@@ -22,7 +22,7 @@ public interface OrderDetailsService {
 	
 	/**
 	 * 查询退货订单信息
-	 * @param goodsId
+	 * @param map
 	 * @return
 	 */
 	List<OrderDetailsPOJO> findOrder(Map<String,Object> map);

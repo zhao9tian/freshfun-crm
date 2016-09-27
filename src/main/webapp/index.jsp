@@ -20,10 +20,6 @@
 <a href="goodsList.do">商品管理</a>
 <br><br>
 <a href="goodstype/getGoodsTypeList.do">分类管理</a>
-<!-- <br><br> -->
-<!-- <a href="activity/activityList.do">活动管理</a> -->
-<%--<br><br>
-<a href="goodsLimitList.do">限时商品管理</a>--%>
 <br><br>
 <a href="specialThemeIndex.do">专题管理</a>
 <br><br>
