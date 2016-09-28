@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.quxin.freshfun.model.goods.GoodAndType;
 import com.quxin.freshfun.model.goods.GoodsPOJO;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 商品Dao层
@@ -81,7 +82,7 @@ public interface GoodsMapper {
 	
 	/**
 	 * 获取名称数量用于验证
-	 * @param goodsName
+	 * @param map
 	 * @return
 	 */
 	Integer getTotalGoodsName(Map<String, Object> map);
@@ -143,7 +144,36 @@ public interface GoodsMapper {
 	 * @return
 	 */
 	Integer insertGoodsSelection(Map<String, Object> map);
-	
-	
-	
+
+	/**
+	 * 查询B端商品
+	 * ziming -16.9.28
+	 * @param map 参数，开始数begin和每页数据量pageSize
+	 * @return
+	 */
+	List<GoodsPOJO> selectGoodsByAgent(Map<String, Object> map);
+
+	/**
+	 * c端往b端推商品
+	 * ziming -16.9.28
+	 * @param id
+	 * @return
+	 */
+	Integer updateGoodsAgentWithC(Integer id);
+
+	/**
+	 * b端上下架商品
+	 * ziming -16.9.28
+	 * @param map
+	 * @return
+	 */
+	Integer updateGoodsAgentWithB(Map<String, Object> map);
+
+	/**
+	 * b端绑定代理人
+	 * ziming -16.9.28
+	 * @param map    goodsId    商品Id,userId    代理人id
+	 * @return
+	 */
+	Integer updateGoodsWithAgent(Map<String, Object> map);
 }

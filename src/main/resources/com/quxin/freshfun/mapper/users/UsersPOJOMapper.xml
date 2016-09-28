@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.UsersMapper">
+	<select id="selectUserIdByPhone" parameterType="java.lang.String" resultType="java.lang.Long">
+		select id
+		from users
+		where mobile_phone=#{phone,jdbcType=VARCHAR} and is_deleted=0
+	</select>
+	<resultMap id="BaseResultMap" type="com.quxin.freshfun.model.user.UsersPOJO">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<select id="selectUserById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select id,mobile_phone
+		from users
+		where id=#{userId,jdbcType=VARCHAR} and is_deleted=0
+	</select>
+</mapper>

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.quxin.freshfun.model.user.UsersPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -141,13 +142,297 @@ public class GoodsInfoController {
 	 * @return
 	 */
 	@RequestMapping("/updateIsOnSale")
-	public String updateIsOnSale(@RequestParam Integer id , Integer isOnSale){
+	@ResponseBody
+	public Map<String,Object> updateIsOnSale(@RequestParam Integer id , Integer isOnSale){
+		String result = "";
 		if(isOnSale == 1){
 			goodsService.updateGoodsDown(id);
+			result="商品下架成功";
 		}else{
 			goodsService.updateGoodsUp(id);
+			result="商品上架成功";
 		}
-		return "redirect:goodsList.do";
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		mapStatus.put("code",1);
+		mapStatus.put("msg",result);
+		map.put("status",mapStatus);
+		return map;
+	}
+
+	/**
+	 * 添加商品到B端  --B端
+	 * @param ids 商品id
+	 * @return
+	 */
+	@RequestMapping("/pushGoodsToB")
+	@ResponseBody
+	public Map<String,Object> pushGoodsToB(@RequestParam String ids){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		Integer num = 0;
+		if(ids!=null&&!"".equals(ids)){
+			String[] idArray = ids.split(",");
+			for(String id : idArray){
+				if(id!=null&&!"".equals(id)){
+					Integer result = goodsService.modifyGoodsAgentWithC(id);
+					if(result==1){
+						num++;
+					}
+				}
+			}
+		}
+		mapStatus.put("code",1);
+		mapStatus.put("msg","执行成功，影响"+num+"条数据");
+		map.put("status",mapStatus);
+		return map;
+	}
+
+	/**
+	 * B端商品上下架   --B端
+	 * @param goodsId 商品id
+	 * @return
+	 */
+	@RequestMapping("/goodsAgentStatus")
+	@ResponseBody
+	public Map<String,Object> goodsAgentStatus(@RequestParam String goodsId,@RequestParam String agent){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		Integer result = 0;
+		if(goodsId!=null&&!"".equals(goodsId)){
+			result = goodsService.modifyGoodsAgentWithB(goodsId,agent);
+		}
+		String resultStr = "";
+		if(agent=="1"){
+			resultStr = "商品下架成功";
+		}else{
+			resultStr = "商品上架成功";
+		}
+		if(result!=0){
+			mapStatus.put("code",1);
+			mapStatus.put("msg",resultStr);
+		}else{
+			mapStatus.put("code",0);
+			mapStatus.put("msg","操作失败");
+		}
+
+		map.put("status",mapStatus);
+		return map;
+	}
+
+	/**
+	 * B端商品绑定代理人  --B端
+	 * @param goodsId 商品id
+	 * @return
+	 */
+	@RequestMapping("/goodsBindProxy")
+	@ResponseBody
+	public Map<String,Object> goodsBindProxy(@RequestParam String goodsId,@RequestParam String phone){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		Integer result = 0;
+		if(phone!=null&&!"".equals(phone)){
+			result = goodsService.modifyGoodsWithAgent(goodsId,phone);
+		}
+
+		if(result==1) {
+			mapStatus.put("code", 1);
+			mapStatus.put("msg", "绑定成功");
+		}else if(result==-1) {
+			mapStatus.put("code", 0);
+			mapStatus.put("msg", "绑定失败，没有用户绑定该手机");
+		}else{
+			mapStatus.put("code", 0);
+			mapStatus.put("msg", "绑定失败，该商品可能已代理");
+		}
+		map.put("status",mapStatus);
+		return map;
+	}
+
+	/**
+	 * 访问B端后台  --B端
+	 * @return
+	 */
+	@RequestMapping("/LoginBackstageOfB")
+	public String LoginBackstageOfB(){
+		return "/goods/goodsListOfB";
+	}
+
+	/**
+	 * 录入绑定手机  --B端
+	 * @return
+	 */
+	@RequestMapping("/goodsTOBindOfB")
+	public String goodsTOBindOfB(){
+		return "/goods/goodsListOfB";
+	}
+
+	/**
+	 * 查询B端商品  --B端
+	 * @param curPage 当前页
+	 * @return
+	 */
+	@RequestMapping("/pullGoodsFromB")
+	@ResponseBody
+	public Map<String,Object> pullGoodsFromB(@RequestParam String curPage){
+		List<GoodsPOJO> goodsList = goodsService.queryGoodsOfB(null,null);
+		Integer pageSize = 20;
+		Integer currentPage = 1;
+		Integer countPage = 1;
+		if(curPage!=null&&!"".equals(curPage)){
+			currentPage = Integer.parseInt(curPage);
+		}
+		if(goodsList!=null){
+			if(goodsList.size()%pageSize==0){
+				countPage = goodsList.size()/pageSize;
+			}else{
+				countPage = goodsList.size()/pageSize+1;
+			}
+		}
+
+		List<GoodsPOJO> goodsLimit = goodsService.queryGoodsOfB(currentPage,pageSize);
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		Map<String,Object> mapResult = new HashMap<String,Object>();
+		List<Map<String,Object>> listDate = new ArrayList<Map<String,Object>>();
+		for(GoodsPOJO goods : goodsLimit){
+			Map<String,Object> mapGoods = new HashMap<String,Object>();
+			mapGoods.put("goodsId",goods.getId());
+			mapGoods.put("goodsName",goods.getGoodsName());
+			mapGoods.put("shopPrice",goods.getShopPrice());
+			mapGoods.put("marketPrice",goods.getMarketPrice());
+			mapGoods.put("isOnAgent",goods.getIsOnAgent());
+			mapGoods.put("proxyId",goods.getMerchantProxyId());
+			if(goods.getMerchantProxyId()!=80808081){
+				List<UsersPOJO> user = goodsService.queryUserById(goods.getMerchantProxyId());
+				if(user!=null&&user.size()>0){
+					mapGoods.put("proxyPhone",user.get(0).getMobilePhone());
+				}
+			}
+			listDate.add(mapGoods);
+		}
+		mapStatus.put("code",1);
+		mapStatus.put("msg","查询成功，共"+goodsLimit.size()+"条数据");
+		mapResult.put("data",listDate);
+		mapResult.put("countPage",countPage);
+		mapResult.put("currentPage",currentPage);
+		map.put("result",mapResult);
+		map.put("status",mapStatus);
+		return map;
+	}
+
+	/**
+	 * 跳转商品详情页  --B端
+	 * @return
+	 */
+	@RequestMapping("/goodsInfoOfB")
+	public String goodsInfoOfB(HttpServletRequest request,String goodsId){
+		request.setAttribute("goodsId",goodsId);
+		return "/goods/goodsInfoOfB";
+	}
+
+	/**
+	 * 根据id获取商品信息  --B端
+	 * @param goodsId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/findGoodsByGoodsId")
+	public Map<String,Object> findGoodsByGoodsId(String goodsId){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		Map<String,Object> mapDate = new HashMap<String,Object>();
+		List<GoodsTypePOJO> goodsTypes = new ArrayList<>();
+		goodsTypes = goodsTypeService.findAll();
+		if(goodsId!=null&&!"".equals(goodsId)){
+			GoodsPOJO goods = goodsService.getGoodsById(Integer.parseInt(goodsId));
+			goods.setGoodsTypeIds((goodsService.getTypeGoodsIds(Integer.parseInt(goodsId))));
+			GoodsDetail goodsDetail = goodsService.getGoodsByGoodsId(Integer.parseInt(goodsId));
+			if(goods!=null){
+				mapDate.put("goodsId",goods.getId());
+				mapDate.put("shopPrice",goods.getShopPriceString());
+				mapDate.put("marketPrice",goods.getMarketPriceString());
+				mapDate.put("proxyId",goods.getMerchantProxyId());
+				mapDate.put("goodsTypes", goodsTypes);
+				mapDate.put("goodsTypeIds", goods.getGoodsTypeIds());
+				try {
+					String gmtCreateStr = DateUtils.longToString(goods.getGmtCreate()*1000, TIMEFORMAT);
+					String gmtModifiedStr =DateUtils.longToString(goods.getGmtModified()*1000, TIMEFORMAT);
+					mapDate.put("createDate",gmtCreateStr);
+					mapDate.put("modifyDate",gmtModifiedStr);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			String rootPath =IMAGEIP;
+			if(goodsDetail!=null){
+				String detailImgPaths = goodsDetail.getDetailImgPath();
+				String carouselImgPaths = goodsDetail.getCarouselImgPath();
+				if(detailImgPaths!=null && !"".equals(detailImgPaths)){
+					List<ImgUtilsPOJO> imgPaths = new ArrayList<>();
+					for(String img : detailImgPaths.split(",")){
+						String imgView = IMAGEIP +img;
+						String imgPath = img;
+						ImgUtilsPOJO imgUtil = new ImgUtilsPOJO(imgView,imgPath);
+						imgPaths.add(imgUtil);
+					}
+					mapDate.put("detailImgPaths", imgPaths);
+				}
+				if(carouselImgPaths!=null && !"".equals(carouselImgPaths)){
+					List<ImgUtilsPOJO> imgPaths = new ArrayList<>();
+					for(String img : carouselImgPaths.split(",")){
+						String imgView = IMAGEIP +img;
+						String imgPath = img;
+						ImgUtilsPOJO imgUtil = new ImgUtilsPOJO(imgView,imgPath);
+						imgPaths.add(imgUtil);
+					}
+					mapDate.put("carouselImgPaths", imgPaths);
+				}
+				mapDate.put("indexPicture", rootPath+goods.getGoodsImg());
+				mapDate.put("standardImgPath", rootPath+goodsDetail.getStandardImgPath());
+				//5描述处理
+				String[] des =  goodsDetail.getDes().split("@`");
+				if(des!=null && des.length>1){
+					String title = des[0];
+					String titleDes = des[1];
+					String editer = des[2];
+					mapDate.put("title", title);
+					mapDate.put("titleDes", titleDes);
+					mapDate.put("editer", editer);
+				}
+
+			}
+		}
+		mapStatus.put("code",1);
+		mapStatus.put("msg","查询成功");
+		map.put("status",mapStatus);
+		map.put("result",mapDate);
+		return map;
+	}
+
+	/**
+	 * 查询商品是否被代理
+	 * @param goodsId
+	 * @return
+	 */
+	@RequestMapping("/findProxyByGoodsId")
+	@ResponseBody
+	public Map<String,Object> findProxyByGoodsId(String goodsId){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> mapStatus = new HashMap<String,Object>();
+		if(goodsId!=null&&!"".equals(goodsId)){
+			GoodsPOJO goods = goodsService.getGoodsById(Integer.parseInt(goodsId));
+			if(goods.getMerchantProxyId()==80808081){
+				mapStatus.put("code",1);
+				mapStatus.put("msg","确认要下架吗？");
+
+			}else{
+				mapStatus.put("code",0);
+				mapStatus.put("msg","该商品已被代理，确认要继续下架吗？");
+			}
+		}
+		map.put("status",mapStatus);
+		return map;
 	}
 	
 	/**

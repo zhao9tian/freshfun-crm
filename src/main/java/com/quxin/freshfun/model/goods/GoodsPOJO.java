@@ -41,6 +41,8 @@ public class GoodsPOJO {
 
     private Byte isOnSale;
 
+    private Byte isOnAgent;
+
     private Byte isNew;
 
     private Byte isHot;
@@ -236,6 +238,13 @@ public class GoodsPOJO {
         this.reservedField = reservedField == null ? null : reservedField.trim();
     }
 
+    public Byte getIsOnAgent() {
+        return isOnAgent;
+    }
+
+    public void setIsOnAgent(Byte isOnAgent) {
+        this.isOnAgent = isOnAgent;
+    }
     
 	@Override
 	public String toString() {

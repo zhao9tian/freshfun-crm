@@ -17,6 +17,7 @@
 			jdbcType="INTEGER" />
 		<result column="warnning" property="warnning" jdbcType="TINYINT" />
 		<result column="is_on_sale" property="isOnSale" jdbcType="TINYINT" />
+		<result column="is_on_agent" property="isOnAgent" jdbcType="TINYINT" />
 		<result column="is_new" property="isNew" jdbcType="TINYINT" />
 		<result column="is_hot" property="isHot" jdbcType="TINYINT" />
 		<result column="is_promote" property="isPromote" jdbcType="TINYINT" />
@@ -54,7 +55,27 @@
 		from gtype_vs_gid
 		where goods_id = #{id}
 	</select>
-
+	<!-- 查询b端商品 ziming 16.9.28 -->
+	<select id="selectGoodsByAgent" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select id,goods_name,shop_price,market_price,is_on_agent,merchant_proxy_id
+		from goods
+		where is_on_sale = 1 and is_on_agent != 0
+		<if test="begin!=null">
+			limit #{begin,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- c端推商品到b端 ziming 16.9.28 -->
+	<update id="updateGoodsAgentWithC">
+		update goods set is_on_agent = 1 where id = #{id,jdbcType=INTEGER} and is_on_agent=0
+	</update>
+	<!-- b端操作商品上下架 ziming 16.9.28 -->
+	<update id="updateGoodsAgentWithB" parameterType="java.util.Map">
+		update goods set is_on_agent = #{agent,jdbcType=INTEGER} where id = #{id,jdbcType=INTEGER} and is_on_agent!=0
+	</update>
+	<!-- b端操作绑定代理人 ziming 16.9.28 -->
+	<update id="updateGoodsWithAgent" parameterType="java.util.Map">
+		update goods set merchant_proxy_id = #{userId,jdbcType=BIGINT} where id = #{goodsId,jdbcType=INTEGER} and merchant_proxy_id=80808081 and is_on_agent!=0
+	</update>
 	<select id="findAll" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

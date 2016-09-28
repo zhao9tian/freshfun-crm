@@ -90,8 +90,7 @@
 								<c:if test="${g.isPromote ==0}">否</c:if>
 							</td>
 							<td><a href="toUpdateGoods.do?id=${g.id}">编辑</a></td>
-							<%-- <td><a href="removeGoods.do?id=${g.id}"><c:if test="${g.isOnSale ==1}">下架商品</c:if><c:if test="${g.isOnSale ==0}">上架商品</c:if></a></td> --%>
-							<td><a href="updateIsOnSale.do?id=${g.id}&isOnSale=${g.isOnSale}"><c:if test="${g.isOnSale ==1}">下架商品</c:if><c:if test="${g.isOnSale ==0}">上架商品</c:if></a></td>
+							<td><a href="javascript:void(0)" onclick="onsale(${g.id},${g.isOnSale})"><c:if test="${g.isOnSale ==1}">下架商品</c:if><c:if test="${g.isOnSale ==0}">上架商品</c:if></a></td>
 							<td><a href="javascript:void(0)" onclick="addToMall(${g.id})">加入Banner</a>&nbsp;<a href="javascript:void(0)" onclick="addToType(${g.id})">加入分类</a>
 							&nbsp;<a href="javascript:void(0)" onclick="addToTheme(${g.id})">加入专题</a>&nbsp;<a href="javascript:void(0)" onclick="addToActivity(${g.id})">加入活动</a></td>
 						</tr>
@@ -112,8 +111,41 @@
 		</fieldset>
 </body>
 <script>
-	
-function addGoods(){document.getElementById('addGoods').submit();}
+
+	function onsale(goodsId,isOnSale){
+		//updateIsOnSale.do?id='+goodsId+'&isOnSale='+inOnSale
+		if(isOnSale==1){
+			$.ajax({
+				url:'findProxyByGoodsId.do?id='+goodsId,
+				dataType:'json',
+				success:function(data){
+					Dialog.confirm(data.status.msg,function(){
+						alert("下架商品");
+						$.ajax({
+							url:'updateIsOnSale.do?id='+goodsId+'&isOnSale='+isOnSale,
+							dataType:'json',
+							success:function(data){
+								Dialog.alert(data.status.msg,function(){location.reload();});
+							}
+						});
+					});
+				}
+			});
+		}else{
+			Dialog.alert("确认要上架吗？",function(){
+				$.ajax({
+					url:'updateIsOnSale.do?id='+goodsId+'&isOnSale='+isOnSale,
+					dataType:'json',
+					success:function(data){
+						Dialog.confirm(data.status.msg,function(){location.reload();});
+					}
+				});
+			});
+
+		}
+	}
+
+	function addGoods(){document.getElementById('addGoods').submit();}
 	
 	function addGoodsTo(type){
 		var goodsInput = document.getElementsByName("goodsId");

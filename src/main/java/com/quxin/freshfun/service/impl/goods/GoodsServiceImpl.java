@@ -4,6 +4,7 @@ import com.quxin.freshfun.dao.*;
 import com.quxin.freshfun.model.goods.*;
 import com.quxin.freshfun.model.specialmall.SpecialMallGoodsPOJO;
 import com.quxin.freshfun.model.specialtheme.SpecialThemeGoodsPOJO;
+import com.quxin.freshfun.model.user.UsersPOJO;
 import com.quxin.freshfun.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,11 +19,13 @@ import java.util.Map;
  * @author TuZl
  * @time 2016年8月22日下午10:43:09
  */
-@Service
+@Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private GoodsMapper goodsDao;
+	@Autowired
+	private UsersMapper userMapper;
 	@Autowired
 	private GoodsDetailMapper goodsDetailMapper;
 	@Autowired
@@ -249,5 +252,56 @@ public class GoodsServiceImpl implements GoodsService {
 		map.put("gmtCreate", System.currentTimeMillis()/1000);
 		map.put("gmtModified", System.currentTimeMillis()/1000);
 		return goodsDao.insertGoodsSelection(map);
+	}
+
+	@Override
+	public List<GoodsPOJO> queryGoodsOfB(Integer curPage,Integer pageSize) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(curPage!=null) {
+			map.put("begin", (curPage - 1) * pageSize);
+			map.put("pageSize", pageSize);
+		}
+		return goodsDao.selectGoodsByAgent(map);
+	}
+
+	@Override
+	public Integer modifyGoodsAgentWithC(String id) {
+		if(id!=null&&!"".equals(id)){
+			Integer goodsId = Integer.parseInt(id);
+			return goodsDao.updateGoodsAgentWithC(goodsId);
+		}
+		return 0;
+	}
+
+	@Override
+	public Integer modifyGoodsAgentWithB(String id, String agent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(id!=null) {
+			map.put("id", id);
+			map.put("agent", agent);
+		}
+		return goodsDao.updateGoodsAgentWithB(map);
+	}
+
+	@Override
+	public Integer modifyGoodsWithAgent(String goodsId, String phone) {
+		Integer result=0;
+		if(phone!=null&&!"".equals(phone)){
+			Long userId = userMapper.selectUserIdByPhone(phone);
+			if(userId==null){
+				result =  -1;
+			}else{
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("goodsId", Integer.parseInt(goodsId));
+				map.put("userId", userId);
+				result = goodsDao.updateGoodsWithAgent(map);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<UsersPOJO> queryUserById(Long id) {
+		return userMapper.selectUserById(id);
 	}
 }

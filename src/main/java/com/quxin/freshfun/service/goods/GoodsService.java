@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.quxin.freshfun.model.goods.GoodsDetail;
 import com.quxin.freshfun.model.goods.GoodsPOJO;
+import com.quxin.freshfun.model.user.UsersPOJO;
 
 /**
  * 商品service
@@ -137,4 +138,39 @@ public interface GoodsService {
 	 * @return
 	 */
 	Integer addGoodsSelection(Map<String,Object> map);
+
+	/**
+	 *	查询B端商品
+	 * @param curPage 开始数
+	 * @param pageSize 每页数据量
+	 * @return
+	 */
+	List<GoodsPOJO> queryGoodsOfB(Integer curPage,Integer pageSize);
+
+	/**
+	 * c端往b端推商品
+	 * ziming -16.9.28
+	 * @param id 商品id
+	 * @return
+	 */
+	Integer modifyGoodsAgentWithC(String id);
+	/**
+	 * b端上下架商品
+	 * ziming -16.9.28
+	 * @param id 商品id
+	 * @param agent 上下架状态
+	 * @return
+	 */
+	Integer modifyGoodsAgentWithB(String id,String agent);
+
+	/**
+	 * b端绑定代理人
+	 * ziming -16.9.28
+	 * @param goodsId    商品Id
+	 * @param phone    代理人手机号
+	 * @return
+	 */
+	Integer modifyGoodsWithAgent(String goodsId,String phone);
+
+	List<UsersPOJO> queryUserById(Long id);
 }
