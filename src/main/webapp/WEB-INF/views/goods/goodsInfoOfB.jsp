@@ -20,7 +20,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.7.2.js"></script>
 <script>
     var goodsId = <%=goodsId%>;
-    alert(goodsId);
     $.ajax({
         url:'findGoodsByGoodsId.do?goodsId='+goodsId,
         dataType:'json',

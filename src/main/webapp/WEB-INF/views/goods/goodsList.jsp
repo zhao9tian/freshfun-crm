@@ -140,7 +140,7 @@
 		//updateIsOnSale.do?id='+goodsId+'&isOnSale='+inOnSale
 		if(isOnSale==1){
 			$.ajax({
-				url:'findProxyByGoodsId.do?id='+goodsId,
+				url:'findProxyByGoodsId.do?goodsId='+goodsId,
 				dataType:'json',
 				success:function(data){
 					Dialog.confirm(data.status.msg,function(){

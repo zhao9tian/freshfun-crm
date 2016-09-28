@@ -299,8 +299,8 @@ public class GoodsInfoController {
 			Map<String,Object> mapGoods = new HashMap<String,Object>();
 			mapGoods.put("goodsId",goods.getId());
 			mapGoods.put("goodsName",goods.getGoodsName());
-			mapGoods.put("shopPrice",goods.getShopPrice());
-			mapGoods.put("marketPrice",goods.getMarketPrice());
+			mapGoods.put("shopPrice",goods.getShopPriceString());
+			mapGoods.put("marketPrice",goods.getMarketPriceString());
 			mapGoods.put("isOnAgent",goods.getIsOnAgent());
 			mapGoods.put("proxyId",goods.getMerchantProxyId());
 			if(goods.getMerchantProxyId()!=0){

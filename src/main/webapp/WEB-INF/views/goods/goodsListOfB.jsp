@@ -134,7 +134,6 @@
 		doc.close();
 	}
 	function goodsInfo(goodsId){
-		alert("商品id:"+goodsId);
 		window.location.href="goodsInfoOfB.do?goodsId="+goodsId;
 	}
 </script>
