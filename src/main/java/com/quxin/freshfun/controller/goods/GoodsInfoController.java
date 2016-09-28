@@ -183,7 +183,7 @@ public class GoodsInfoController {
 			}
 		}
 		mapStatus.put("code",1);
-		mapStatus.put("msg","执行成功，影响"+num+"条数据");
+		mapStatus.put("msg","成功推送"+num+"件商品");
 		map.put("status",mapStatus);
 		return map;
 	}
@@ -303,7 +303,7 @@ public class GoodsInfoController {
 			mapGoods.put("marketPrice",goods.getMarketPrice());
 			mapGoods.put("isOnAgent",goods.getIsOnAgent());
 			mapGoods.put("proxyId",goods.getMerchantProxyId());
-			if(goods.getMerchantProxyId()!=80808081){
+			if(goods.getMerchantProxyId()!=0){
 				List<UsersPOJO> user = goodsService.queryUserById(goods.getMerchantProxyId());
 				if(user!=null&&user.size()>0){
 					mapGoods.put("proxyPhone",user.get(0).getMobilePhone());
@@ -422,7 +422,7 @@ public class GoodsInfoController {
 		Map<String,Object> mapStatus = new HashMap<String,Object>();
 		if(goodsId!=null&&!"".equals(goodsId)){
 			GoodsPOJO goods = goodsService.getGoodsById(Integer.parseInt(goodsId));
-			if(goods.getMerchantProxyId()==80808081){
+			if(goods.getMerchantProxyId()==0){
 				mapStatus.put("code",1);
 				mapStatus.put("msg","确认要下架吗？");
 
@@ -567,8 +567,8 @@ public class GoodsInfoController {
 			goods.setMarketPrice(marketPriceD.intValue());
 
 			//商户id,代理id
-			goods.setStoreId(80808080);
-			goods.setMerchantProxyId(80808081L);
+			//goods.setStoreId(0);
+			//goods.setMerchantProxyId(0l);
 			//默认上架
 			goods.setIsOnSale((byte)1);
 			Integer goodsId = goodsService.addGoods(goods, gm,goodsTypeIds);

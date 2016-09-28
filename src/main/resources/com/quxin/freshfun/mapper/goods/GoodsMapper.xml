@@ -74,7 +74,7 @@
 	</update>
 	<!-- b端操作绑定代理人 ziming 16.9.28 -->
 	<update id="updateGoodsWithAgent" parameterType="java.util.Map">
-		update goods set merchant_proxy_id = #{userId,jdbcType=BIGINT} where id = #{goodsId,jdbcType=INTEGER} and merchant_proxy_id=80808081 and is_on_agent!=0
+		update goods set merchant_proxy_id = #{userId,jdbcType=BIGINT} where id = #{goodsId,jdbcType=INTEGER} and merchant_proxy_id=0 and is_on_agent!=0
 	</update>
 	<select id="findAll" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select
