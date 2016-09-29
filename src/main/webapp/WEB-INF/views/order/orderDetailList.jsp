@@ -46,7 +46,7 @@
 				for(OrderDetailsPOJO detail : detailList){
 				%>
 				<tr bgcolor='#F4FAFF' style="text-align: center;">
-					<td><%=detail.getOrderDetailsId() %></td>
+					<td><%=detail.getId() %></td>
 					<td><%=detail.getUser()!=null?detail.getUser().getUserName():"" %></td>
 					<%if(detail.getIsLimit()==0){ %>
 						<td><img style="width:100px;height:100px;" src="${IMAGEIP}<%=detail.getGoods().getGoodsImg() %>"/></td>

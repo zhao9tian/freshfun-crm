@@ -25,7 +25,7 @@ public interface OrderDetailsMapper {
 	
 	/**
 	 * 查询退货订单信息
-	 * @param goodsId
+	 * @param map
 	 * @return
 	 */
 	List<OrderDetailsPOJO> findRetOrder(Map<String,Object> map);

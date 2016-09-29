@@ -44,11 +44,11 @@
 			</tr>
 			<%}else{ %>
 			<tr bgcolor='#F4FAFF' style="text-align: center;">
-				<th colspan="2">订单编号为:<span style="color:red"><%=orderDetailid %></span><br><br>退款原因信息没有录入或者数据丢失<br><br>您仍然可以处理该订单的退款请求</th>
+				<th colspan="2">订单编号为:<span style="color:red"><%=refund.getOrderDetailsId() %></span><br><br>退款原因信息没有录入或者数据丢失<br><br>您仍然可以处理该订单的退款请求</th>
 			</tr>
 			<%} %>
 		</table>
-			<input type="hidden" name="orderDetailId" value="<%=orderDetailid %>"/>
+			<input type="hidden" name="orderDetailId" value="<%=refund.getOrderDetailsId() %>"/>
 		
 </body>
 </html>

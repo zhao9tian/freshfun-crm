@@ -24,7 +24,7 @@
     <result column="update_date" property="updateDate" jdbcType="BIGINT" />
     <result column="delivery_name" property="deliveryName" jdbcType="VARCHAR" />
     <result column="is_limit" property="isLimit" jdbcType="INTEGER" />
-    <association property="user" column="user_id" select="com.quxin.freshfun.dao.UsersMapper.selectByUserId"></association>
+    <association property="user" column="user_id" select="com.quxin.freshfun.dao.UsersMapper.selectUserById"></association>
   </resultMap>
   <sql id="Base_Column_List" >
     id, user_id, order_id, order_details_id, goods_id, actual_price, delivery_num, address_id, 
@@ -63,7 +63,7 @@
   </select>
   
   <update id="dealRetOrder">
-  	update order_details set refund_status = #{isOk,jdbcType=INTEGER} where order_details_id = #{detailId,jdbcType=VARCHAR}
+  	update order_details set refund_status = #{isOk,jdbcType=INTEGER} where id = #{detailId,jdbcType=VARCHAR}
   </update>
   
   
