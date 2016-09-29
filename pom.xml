@@ -367,7 +367,7 @@
 				<archive>
 					<addMavenDescriptor>false</addMavenDescriptor>
 				</archive>
-				<warName>FreshFun</warName>
+`				<warName>freshfun-crm</warName>
 				<webResources>
 					<resource>
 						<directory>src/main/resources/${env}</directory>
