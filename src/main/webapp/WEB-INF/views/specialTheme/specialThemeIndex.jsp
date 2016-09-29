@@ -24,7 +24,7 @@
 <body>
 	<fieldset>
 		<legend><font style="color:red">操作</font></legend>
-		<form action="toAddSpecialTheme.do" id="myForm">
+		<form action="toAddSpecialTheme.do" id="myForm" method="post">
 		</form>
 		<input type="button" onclick="toAdd()" value="新增专题"/>
 		<input type="button" onclick="javascript:history.go(-1)" value="<<返回">
