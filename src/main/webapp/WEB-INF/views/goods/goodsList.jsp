@@ -160,7 +160,7 @@
 					url:'updateIsOnSale.do?id='+goodsId+'&isOnSale='+isOnSale,
 					dataType:'json',
 					success:function(data){
-						Dialog.confirm(data.status.msg,function(){location.reload();});
+						Dialog.alert(data.status.msg,function(){location.reload();});
 					}
 				});
 			});

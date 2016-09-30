@@ -97,11 +97,16 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 	}
 
+	/**
+	 * 商品下架
+	 * @param goodsId
+	 * @param modifyDate
+	 */
 	@Override
 	public void updateGoodsDown(Integer goodsId,Long modifyDate){
 		goodsDao.removeGood(goodsId);
-		GoodsRelationPOJO goodsRelation = new GoodsRelationPOJO();
-		goodsRelation.setGoodsId(goodsId);
+		GoodsRelationPOJO goodsRelation = new GoodsRelationPOJO();//新增关系对象
+		goodsRelation.setGoodsId(goodsId);//为商品关系商品id赋值
 		List<TypeGoodsPOJO> listType = typeGoodsMapper.findTypeGoodsByGoodsId(goodsId);
 		if(listType!=null){
 			for(TypeGoodsPOJO tgp : listType){
@@ -134,7 +139,7 @@ public class GoodsServiceImpl implements GoodsService {
 				if(goodsRelation.getThemeIds()==null||"".equals(goodsRelation.getThemeIds()))
 					goodsRelation.setThemeIds(stgp.getThemeId().toString());
 				else
-					goodsRelation.setBannerIds(goodsRelation.getThemeIds()+","+stgp.getThemeId().toString());
+					goodsRelation.setThemeIds(goodsRelation.getThemeIds()+","+stgp.getThemeId().toString());
 				Map<String,Object> map = new HashMap<>();
 				map.put("goodsId", goodsId);
 				map.put("themeId", stgp.getThemeId());
@@ -214,6 +219,11 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.getAllSales(goodsId);
 	}
 
+	/**
+	 * 商品上架
+	 * @param goodsId
+	 * @param modifyDate
+	 */
 	@Override
 	public void updateGoodsUp(Integer goodsId,Long modifyDate) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -221,31 +231,33 @@ public class GoodsServiceImpl implements GoodsService {
 		map.put("modifyDate",modifyDate);
 		goodsDao.grounding(map);
 		GoodsRelationPOJO grp = goodsReationMapper.selectGoodsRelationByGoodsId(goodsId);
-		if(grp.getBannerIds()!=null&&!"".equals(grp.getBannerIds())){
-			String[] bIds = grp.getBannerIds().split(",");
-			for (String bId : bIds) {
-				SpecialMallGoodsPOJO smgp = new SpecialMallGoodsPOJO();
-				smgp.setGoodsId(goodsId);
-				smgp.setMallId(Integer.parseInt(bId));
-				specialMallGoodsMapper.insertSelective(smgp);
+		if(grp!=null) {
+			if (grp.getBannerIds() != null && !"".equals(grp.getBannerIds())) {
+				String[] bIds = grp.getBannerIds().split(",");
+				for (String bId : bIds) {
+					SpecialMallGoodsPOJO smgp = new SpecialMallGoodsPOJO();
+					smgp.setGoodsId(goodsId);
+					smgp.setMallId(Integer.parseInt(bId));
+					specialMallGoodsMapper.insertSelective(smgp);
+				}
 			}
-		}
-		if(grp.getThemeIds()!=null&&!"".equals(grp.getThemeIds())){
-			String[] tIds = grp.getThemeIds().split(",");
-			for (String tId : tIds) {
-				SpecialThemeGoodsPOJO stgp = new SpecialThemeGoodsPOJO();
-				stgp.setGoodsId(goodsId);
-				stgp.setThemeId(Integer.parseInt(tId));
-				specialThemeGoodsMapper.insert(stgp);
+			if (grp.getThemeIds() != null && !"".equals(grp.getThemeIds())) {
+				String[] tIds = grp.getThemeIds().split(",");
+				for (String tId : tIds) {
+					SpecialThemeGoodsPOJO stgp = new SpecialThemeGoodsPOJO();
+					stgp.setGoodsId(goodsId);
+					stgp.setThemeId(Integer.parseInt(tId));
+					specialThemeGoodsMapper.insert(stgp);
+				}
 			}
-		}
-		if(grp.getTypeIds()!=null&&!"".equals(grp.getTypeIds())){
-			String[] tIds = grp.getTypeIds().split(",");
-			for (String tId : tIds) {
-				TypeGoodsPOJO tgp = new TypeGoodsPOJO();
-				tgp.setGoodsId(goodsId);
-				tgp.setGoodsTypeId(Integer.parseInt(tId));
-				typeGoodsMapper.insertSelective(tgp);
+			if (grp.getTypeIds() != null && !"".equals(grp.getTypeIds())) {
+				String[] tIds = grp.getTypeIds().split(",");
+				for (String tId : tIds) {
+					TypeGoodsPOJO tgp = new TypeGoodsPOJO();
+					tgp.setGoodsId(goodsId);
+					tgp.setGoodsTypeId(Integer.parseInt(tId));
+					typeGoodsMapper.insertSelective(tgp);
+				}
 			}
 		}
 		goodsReationMapper.delGoodsRelation(goodsId);
