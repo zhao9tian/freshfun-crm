@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quxin.freshfun.dao.WithdrawMapper" >
+    <!--查询可提现金额 -->
+    <select id="selectWithdrawList" parameterType="java.util.Map" resultType="com.quxin.freshfun.model.withdraw.WithdrawPOJO">
+        SELECT `id` , `user_id` as `userId` , `withdraw_price` as `withDrawPrice` ,`withdraw_type` as `withDrawType` , `payment_account` as `paymentAccount` ,
+              `state` as `state` , `deal_person` as `dealPerson` , `handler_reason` as `handlerReason` , `create_date` as `createDate` , `update_date` as `updateDate`
+              FROM withdraw
+        <where>
+              <if test="state != null">
+                  state = #{state}
+              </if>
+        </where>
+        order by  create_date desc
+        <if test="start != null">
+            limit #{start} , 10
+        </if>
+    </select>
+
+    <select id="selectCountWithdraw" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select COUNT(id) from withdraw
+        <where>
+            <if test="state != NULL" >
+                state = #{state}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateToHandled" parameterType="java.util.Map">
+        update withdraw set state = 1 ,update_date = #{updateDate}
+        where id = #{id}
+    </update>
+
+    <update id="updateToReject" parameterType="java.util.Map">
+        update withdraw set state = 2 , handler_reason = #{handlerReason} , update_date = #{updateDate}
+        where id = #{id}
+    </update>
+
+
+
+</mapper>

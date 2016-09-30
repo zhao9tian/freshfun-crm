@@ -285,6 +285,12 @@
 	  <artifactId>httpclient</artifactId>
 	  <version>4.4.1</version>
 	</dependency>
+	<!-- jackson-->
+	<dependency>
+	  <groupId>org.codehaus.jackson</groupId>
+	  <artifactId>jackson-mapper-asl</artifactId>
+	  <version>1.9.13</version>
+	</dependency>
 
     <!-- jstl标签库 -->
     <dependency>

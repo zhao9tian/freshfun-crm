@@ -1,0 +1,194 @@
+/* CSS Document */
+* {
+  margin: 0;
+  padding: 0; }
+
+ul, ol, li {
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+img {
+  display: block; }
+
+header {
+  width: 100%;
+  height: 50px;
+  font-family: "microsoft yahei";
+  font-size: 30px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  background: #fff; }
+
+.tab {
+  padding-top: 50px; }
+  .tab i {
+    font-style: normal; }
+  .tab ul li a i {
+    font-style: normal; }
+  .tab ul li .order table thead tr {
+    height: 40px;
+    background: #eee; }
+    .tab ul li .order table thead tr th {
+      width: 140px;
+      text-align: center; }
+    .tab ul li .order table thead tr th:nth-child(1) {
+      width: 301px; }
+  .tab ul li .order table tbody tr {
+    height: 40px;
+    background: #eee; }
+    .tab ul li .order table tbody tr th {
+      min-width: 140px;
+      max-width: 400px;
+      text-align: center; }
+      .tab ul li .order table tbody tr th .orderMsg {
+        width: 100%;
+        height: 30px;
+        text-align: left;
+        text-indent: 40px; }
+        .tab ul li .order table tbody tr th .orderMsg span {
+          padding-left: 36px; }
+      .tab ul li .order table tbody tr th dl dt {
+        float: left; }
+        .tab ul li .order table tbody tr th dl dt img {
+          width: 80px;
+          height: 80px;
+          margin: 10px; }
+      .tab ul li .order table tbody tr th dl dd {
+        float: left;
+        text-align: left;
+        text-align: -webkit-left;
+        text-align: -moz-left; }
+        .tab ul li .order table tbody tr th dl dd h4 {
+          width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+        .tab ul li .order table tbody tr th dl dd h5 {
+          width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+        .tab ul li .order table tbody tr th dl dd h6 {
+          width: 120px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+      .tab ul li .order table tbody tr th .remark {
+        color: blue;
+        cursor: pointer; }
+      .tab ul li .order table tbody tr th .shipments {
+        color: blue;
+        cursor: pointer; }
+    .tab ul li .order table tbody tr .addressMsg {
+      text-align: left;
+      text-indent: 20px; }
+    .tab ul li .order table tbody tr .copy {
+      cursor: pointer;
+      color: blue; }
+
+.remarkFrame {
+  width: 400px;
+  height: 200px;
+  border: 1px solid #000;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff; }
+  .remarkFrame .title {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 22px; }
+  .remarkFrame .textarea {
+    width: 340px;
+    height: 120px;
+    border: 1px solid #000;
+    margin: 0 30px; }
+    .remarkFrame .textarea textarea {
+      width: 338px;
+      height: 118px; }
+  .remarkFrame .btn-YN {
+    width: 100%;
+    height: 46px;
+    padding-top: 10px; }
+    .remarkFrame .btn-YN button {
+      margin-left: 80px;
+      width: 80px;
+      height: 30px;
+      float: left;
+      border: 0;
+      border-radius: 5px; }
+    .remarkFrame .btn-YN .btn-Y {
+      background: green; }
+    .remarkFrame .btn-YN .btn-N {
+      background: #bbb; }
+
+.shipmentsFrame {
+  width: 540px;
+  height: 360px;
+  background: #fff;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto; }
+  .shipmentsFrame .sf-title {
+    width: 100%;
+    height: 30px;
+    text-indent: 10px;
+    line-height: 30px;
+    font-size: 22px; }
+  .shipmentsFrame ul {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px; }
+    .shipmentsFrame ul li {
+      width: 180px;
+      float: left;
+      margin: 0 10px 0 10px; }
+      .shipmentsFrame ul li input {
+        width: 180px; }
+    .shipmentsFrame ul li:nth-child(1) {
+      width: 80px; }
+  .shipmentsFrame .sf-bz {
+    height: 100px; }
+    .shipmentsFrame .sf-bz li .textarea textarea {
+      width: 380px;
+      height: 100px; }
+  .shipmentsFrame .sf-btn-YN {
+    width: 100%;
+    height: 46px;
+    padding-top: 10px; }
+    .shipmentsFrame .sf-btn-YN button {
+      margin-left: 140px;
+      width: 80px;
+      height: 30px;
+      float: left;
+      border: 0;
+      border-radius: 5px; }
+    .shipmentsFrame .sf-btn-YN .sf-btn-Y {
+      background: orangered; }
+    .shipmentsFrame .sf-btn-YN .sf-btn-N {
+      background: #bbb; }
+
+@media screen and (max-width: 760px) {
+  body {
+    font-size: 50%; } }
+@media screen and (min-width: 760px) and (max-width: 1470px) {
+  body {
+    font-size: 12px; } }
+@media screen and (min-width: 1470px) and (max-width: 2000px) {
+  body {
+    font-size: 16px; } }
+
+/*# sourceMappingURL=backOrder.css.map */
