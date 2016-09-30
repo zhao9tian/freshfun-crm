@@ -3,10 +3,7 @@ package com.quxin.freshfun.controller.goods;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -131,8 +128,14 @@ public class GoodsInfoController {
 	 */
 	@RequestMapping("/removeGoods")
 	public String removeGoods(@RequestParam(value="id",required =false ,defaultValue="-1") Integer id){
+		Long modifyDate = null;
+		try {
+			modifyDate = DateUtils.stringToLong(DateUtils.getDate(new Date(), "yyyy-MM-dd HH-mm-ss"), "yyyy-MM-dd HH-mm-ss");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		if(id!=-1){
-			goodsService.updateGoodsDown(id);
+			goodsService.updateGoodsDown(id,modifyDate);
 		}
 		return "redirect:goodsList.do";
 	}
@@ -145,11 +148,17 @@ public class GoodsInfoController {
 	@ResponseBody
 	public Map<String,Object> updateIsOnSale(@RequestParam Integer id , Integer isOnSale){
 		String result = "";
+		Long modifyDate = null;
+		try {
+			modifyDate = DateUtils.stringToLong(DateUtils.getDate(new Date(), "yyyy-MM-dd HH-mm-ss"), "yyyy-MM-dd HH-mm-ss");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		if(isOnSale == 1){
-			goodsService.updateGoodsDown(id);
+			goodsService.updateGoodsDown(id,modifyDate/1000);
 			result="商品下架成功";
 		}else{
-			goodsService.updateGoodsUp(id);
+			goodsService.updateGoodsUp(id,modifyDate/1000);
 			result="商品上架成功";
 		}
 		Map<String,Object> map = new HashMap<String,Object>();

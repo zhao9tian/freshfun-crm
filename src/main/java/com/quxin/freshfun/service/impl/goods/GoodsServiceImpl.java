@@ -6,6 +6,7 @@ import com.quxin.freshfun.model.specialmall.SpecialMallGoodsPOJO;
 import com.quxin.freshfun.model.specialtheme.SpecialThemeGoodsPOJO;
 import com.quxin.freshfun.model.user.UsersPOJO;
 import com.quxin.freshfun.service.goods.GoodsService;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -97,7 +98,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void updateGoodsDown(Integer goodsId){
+	public void updateGoodsDown(Integer goodsId,Long modifyDate){
 		goodsDao.removeGood(goodsId);
 		GoodsRelationPOJO goodsRelation = new GoodsRelationPOJO();
 		goodsRelation.setGoodsId(goodsId);
@@ -214,8 +215,11 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void updateGoodsUp(Integer goodsId) {
-		goodsDao.grounding(goodsId);
+	public void updateGoodsUp(Integer goodsId,Long modifyDate) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("goodsId",goodsId);
+		map.put("modifyDate",modifyDate);
+		goodsDao.grounding(map);
 		GoodsRelationPOJO grp = goodsReationMapper.selectGoodsRelationByGoodsId(goodsId);
 		if(grp.getBannerIds()!=null&&!"".equals(grp.getBannerIds())){
 			String[] bIds = grp.getBannerIds().split(",");

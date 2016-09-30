@@ -65,7 +65,7 @@ public interface GoodsService {
 	 * 单个商品下架
 	 * @param id
 	 */
-	void updateGoodsDown(Integer id);
+	void updateGoodsDown(Integer id,Long modifyDate);
 	
 	/**
 	 * 获取商品类型
@@ -130,7 +130,7 @@ public interface GoodsService {
 	 * 单个商品上架
 	 * @param id
 	 */
-	void updateGoodsUp(Integer id);
+	void updateGoodsUp(Integer id,Long modifyDate);
 	
 	/**
 	 * 新增 精选图片

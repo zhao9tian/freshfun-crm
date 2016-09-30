@@ -318,9 +318,9 @@
 	</update>
 	
 	<!-- 修改状态为上架 -->
-	<update id="grounding" parameterType="java.lang.Integer">
+	<update id="grounding"  parameterType="java.util.Map">
 		update goods set
-		is_on_sale = 1 where id=#{id}
+		is_on_sale = 1,gmt_modified=#{modifyDate} where id=#{goodsId}
 	</update>
 
 	<!-- 删除关联关系 -->

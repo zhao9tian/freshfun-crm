@@ -161,6 +161,11 @@ public class SpecialThemeController {
 		if("0".equals(isdelete))
 			b=1;
 		st.setIsDeleted(b);
+		try {
+			st.setGmtModified(DateUtils.stringToLong(DateUtils.getDate(new Date(), "yyyy-MM-dd HH-mm-ss"), "yyyy-MM-dd HH-mm-ss"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		stService.update(st);
 		String result = "";
 		if("0".equals(isdelete))

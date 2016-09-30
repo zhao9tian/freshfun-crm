@@ -136,7 +136,7 @@ public interface GoodsMapper {
 	 */
 	Integer getAllSales(Integer goodsId);
 
-	void grounding(Integer id);
+	void grounding(Map<String,Object> map);
 
 	/**
 	 * 新增精选商品
