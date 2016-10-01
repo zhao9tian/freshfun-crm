@@ -21,7 +21,7 @@ window.onload = function() {
 		//加载全部第一页
 		$.ajax({
 			type:"get",
-			url:"http://freshfun365.com/selectBackstageOrdersCount.do",
+			url:"https://freshfun365.com/FreshFun/selectBackstageOrdersCount.do",
 		    success:function(DATA){
 		    	console.log(JSON.parse(DATA));
 			    var DATA = JSON.parse(DATA);
@@ -64,7 +64,7 @@ $('#waitingPayment').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstagePendingPaymentOrderCount.do",
+		url:"https://freshfun365.com/FreshFun/selectBackstagePendingPaymentOrderCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -102,7 +102,7 @@ $('#waitingDelivery').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageAwaitDeliverOrderCount.do",
+		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitDeliverOrderCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -141,7 +141,7 @@ $('#waitingConfirmDelivery').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageAwaitGoodsReceiptCount.do",
+		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitGoodsReceiptCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -178,7 +178,7 @@ $('#dealOver').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectFinishOrderCount.do",
+		url:"https://freshfun365.com/FreshFun/selectFinishOrderCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -216,7 +216,7 @@ $('#dealClose').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageOrderCloseCount.do",
+		url:"https://freshfun365.com/FreshFun/selectBackstageOrderCloseCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -255,7 +255,7 @@ $('#dealClose').click(function() {
 function addOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageOrderClose.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectBackstageOrderClose.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -294,7 +294,7 @@ function addOrder(p) {
 						orderState = '已退款';
 					}
 		    		
-		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods[0].goodsImg+'"/></dt><dd><h4>'+obj.goods[0].goodsName+'</h4><h5>'+obj.goods[0].goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods[0].marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>'+orderState+'</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
+		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>'+orderState+'</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
 		    	
@@ -317,7 +317,7 @@ function addOrder(p) {
 					alert('已备注');
 					$.ajax({
 						type:"get",
-						url:"http://freshfun365.com/orderRemark.do?orderId="+orderId+'&remark='+remark,
+						url:"https://freshfun365.com/FreshFun/orderRemark.do?orderId="+orderId+'&remark='+remark,
 						success:function(data){
 							console.log(JSON.parse(data));
 						}
@@ -345,7 +345,7 @@ function addOrder(p) {
 function waitingPaymentOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstagePendingPaymentOrder.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectBackstagePendingPaymentOrder.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -369,7 +369,7 @@ function waitingPaymentOrder(p) {
 					}else if(obj.payPlateform==2){
 						orderSource = 'B端推广';
 					};
-		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods[0].goodsImg+'"/></dt><dd><h4>'+obj.goods[0].goodsName+'</h4><h5>'+obj.goods[0].goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods[0].marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待付款</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
+		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待付款</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
 		    	
@@ -395,7 +395,7 @@ function waitingPaymentOrder(p) {
 function waitingDeliveryOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageAwaitDeliverOrder.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitDeliverOrder.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -416,7 +416,7 @@ function waitingDeliveryOrder(p) {
 					}else if(obj.payPlateform==2){
 						orderSource = 'B端推广';
 					};
-		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods[0].goodsImg+'"/></dt><dd><h4>'+obj.goods[0].goodsName+'</h4><h5>'+obj.goods[0].goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods[0].marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待发货</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments shipments'+obj.orderId+'">发货</h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
+		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.good.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待发货</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments shipments'+obj.orderId+'">发货</h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    		fhOrderIdArr.push('.shipments'+obj.orderId);
 		    	});
@@ -449,7 +449,7 @@ function waitingDeliveryOrder(p) {
 					alert('已发货');
 					$.ajax({
 						type:"post",
-						url:"http://freshfun365.com/selectFinishOrderCount.do",
+						url:"https://freshfun365.com/FreshFun/selectFinishOrderCount.do",
 						dataType: 'JSON',
                 		contentType: 'application/json;charset=utf-8',
 						data:JSON.stringify({
@@ -492,7 +492,7 @@ function waitingDeliveryOrder(p) {
 function waitingConfirmDeliveryOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageAwaitGoodsReceipt.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitGoodsReceipt.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -512,7 +512,7 @@ function waitingConfirmDeliveryOrder(p) {
 					}else if(obj.payPlateform==2){
 						orderSource = 'B端推广';
 					};
-		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods[0].goodsImg+'"/></dt><dd><h4>'+obj.goods[0].goodsName+'</h4><h5>'+obj.goods[0].goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods[0].marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待发货</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
+		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待发货</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
 		    	
@@ -538,7 +538,7 @@ function waitingConfirmDeliveryOrder(p) {
 function dealOverOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectFinishOrder.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectFinishOrder.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -563,7 +563,7 @@ function dealOverOrder(p) {
 						orderState = '已申请售后';
 					}
 					
-		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods[0].goodsImg+'"/></dt><dd><h4>'+obj.goods[0].goodsName+'</h4><h5>'+obj.goods[0].goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods[0].marketMoney+'</i></th><th>'+obj.count+'</th><th>'+orderState+'</th><th></th><th>'+orderSource+'</th><th></th><th>交易完成</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
+		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th>'+orderState+'</th><th></th><th>'+orderSource+'</th><th></th><th>交易完成</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
 		    	
@@ -590,7 +590,7 @@ function dealOverOrder(p) {
 function dealCloseOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"http://freshfun365.com/selectBackstageOrderClose.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectBackstageOrderClose.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -610,7 +610,7 @@ function dealCloseOrder(p) {
 					}else if(obj.payPlateform==2){
 						orderSource = 'B端推广';
 					};
-		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods[0].goodsImg+'"/></dt><dd><h4>'+obj.goods[0].goodsName+'</h4><h5>'+obj.goods[0].goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods[0].marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>交易关闭</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
+		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>交易关闭</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
 		    	
