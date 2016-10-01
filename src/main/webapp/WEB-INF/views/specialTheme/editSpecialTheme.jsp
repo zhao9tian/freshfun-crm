@@ -5,6 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dialog/zDialog.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dialog/zDrag.js"></script>
 <style>
 	tr{
 	 COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold;
@@ -37,7 +40,7 @@
 			</tr>
 			<tr>
 				<td><label>专题图片</label></td>
-				<td><%if(st!=null&&st.getThemeImg()!=null){%><%} %><img name="themeImg" alt="themeImg" src="${IMAGEIP}<%=st.getThemeImg()%>">
+				<td><%if(st!=null&&st.getThemeImg()!=null){%><img name="themeImg" alt="themeImg" src="${IMAGEIP}<%=st.getThemeImg()%>"><%} %>
 					<input type="file" name="themeImg1">
 				</td>
 				<td><label>专题图片描述</label></td>
@@ -55,8 +58,28 @@
 				</td>
 			</tr>
 		</table>
-		<div style="text-align: center;margin-top:20px;"><input type="submit" value="提交"></div>
+		<div style="text-align: center;margin-top:20px;"><input type="button" onclick="doSubmit()" value="提交"></div>
 	</form>
 	</fieldset>
 </body>
+<script>
+	function doSubmit(){
+		var themeDes = document.getElementsByName("themeDes")[0].value;
+		if(themeDes==""){
+			alert("请输入专题描述");
+			return ;
+		}
+		var ThemeContent = document.getElementsByName("ThemeContent")[0].value;
+		if(ThemeContent==""){
+			alert("请输入专题描述");
+			return ;
+		}
+		var themeInfoContent = document.getElementsByName("themeInfoContent")[0].value;
+		if(themeInfoContent==""){
+			alert("请输入专题详情描述");
+			return ;
+		}
+		document.forms[0].submit();
+	}
+</script>
 </html>

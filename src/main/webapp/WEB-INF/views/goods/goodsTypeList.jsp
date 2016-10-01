@@ -36,7 +36,7 @@
 		<table border="0" cellpadding="3" cellspacing="1" width="100%" align="center" style="background-color: #b9d8f3;">
 			<tr style="text-align: center; COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 				<th>分类名称</th>
-				<th>分类ICON图片</th>
+				<%--<th>分类ICON图片</th>--%>
 				<th>分类静态图片</th>
 				<th>分类详情描述</th>
 				<th>分类创建时间</th>
@@ -49,7 +49,7 @@
 				%>
 				<tr bgcolor='#F4FAFF' style="text-align: center;">
 					<td><%=type.getGoodsType() %></td>
-					<td><img style="width:100px;height:100px;" src="${IMAGEIP}<%=type.getGoodsTypeImg()%>"/></td>
+					<%--<td><img style="width:100px;height:100px;" src="${IMAGEIP}<%=type.getGoodsTypeImg()%>"/></td>--%>
 					<td><img style="width:100px;height:100px;" src="${IMAGEIP}<%=type.getGoodsInfoImg()%>"/></td>
 					<td><%=type.getGoodsInfoDes() %></td>
 					<td><%=DateUtils.longToString(type.getGmtCreate(), "yyyy-MM-dd HH-mm-ss") %></td>

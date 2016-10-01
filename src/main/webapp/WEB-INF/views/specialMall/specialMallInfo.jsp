@@ -5,6 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dialog/zDialog.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/dialog/zDrag.js"></script>
 <style>
 	tr{
 	 COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold;
@@ -55,8 +58,39 @@
 				</td>
 			</tr>
 		</table>
-		<div style="text-align: center;margin-top:20px;"><input type="submit" value="提交"></div>
+		<div style="text-align: center;margin-top:20px;"><input type="button" onclick="doSubmit()" value="提交"></div>
 	</form>
 	</fieldset>
 </body>
+<script>
+	function doSubmit(){
+		var id = document.getElementsByName("id")[0].value;
+		var mallDes = document.getElementsByName("mallDes")[0].value;
+		if(mallDes==""){
+			alert("请输入Banner描述");
+			return ;
+		}
+		var mallImg1 = document.getElementsByName("mallImg1")[0].value;
+		if(id==""&&mallImg1==""){
+			alert("请选择Banner图片");
+			return ;
+		}
+		var mallContent = document.getElementsByName("mallContent")[0].value;
+		if(mallContent==""){
+			alert("请输入Banner图片描述");
+			return ;
+		}
+		var mallInfoImg1 = document.getElementsByName("mallInfoImg1")[0].value;
+		if(id==""&&mallInfoImg1==""){
+			alert("请选择Banner详情图片");
+			return ;
+		}
+		var mallInfoContent = document.getElementsByName("mallInfoContent")[0].value;
+		if(mallInfoContent==""){
+			alert("请输入Banner详情描述");
+			return ;
+		}
+		document.forms[0].submit();
+	}
+</script>
 </html>
