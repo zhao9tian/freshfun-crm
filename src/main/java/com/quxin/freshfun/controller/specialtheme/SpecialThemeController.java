@@ -103,10 +103,8 @@ public class SpecialThemeController {
 		try {
 			path = UploadUtils.upload(request);
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(path!=null){
@@ -127,7 +125,7 @@ public class SpecialThemeController {
 					}
 				}
 			}
-			
+
 		}
 		if(st.getId()!=null){
 			try {
@@ -147,7 +145,7 @@ public class SpecialThemeController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return "redirect:specialThemeIndex.do";
 	}
 	

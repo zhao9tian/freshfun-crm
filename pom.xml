@@ -10,7 +10,6 @@
 
     <properties>
   	<springVersion>3.2.5.RELEASE</springVersion>
-  	<velocity.version>1.7</velocity.version>
   	<spring-version>4.0.5.RELEASE</spring-version>
   	<commons.dbcp.version>1.4</commons.dbcp.version>
   	<mybatis.version>3.2.7</mybatis.version>
@@ -230,33 +229,6 @@
         <version>1.2.2</version>
     </dependency>
     <!-- ======================================== -->
-			<!-- velocity相关依赖 -->
-			<!-- ======================================== -->
-	<dependency>
-		<groupId>org.apache.velocity</groupId>
-		<artifactId>velocity</artifactId>
-		<version>${velocity.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>velocity-dvsl</groupId>
-		<artifactId>velocity-dvsl</artifactId>
-		<version>0.45</version>
-	</dependency>
-	<dependency>
-		<groupId>velocity-tools</groupId>
-		<artifactId>velocity-tools</artifactId>
-		<version>2.0-beta1</version>
-	</dependency>
-	<dependency>
-		<groupId>velocity-tools</groupId>
-		<artifactId>velocity-tools-generic</artifactId>
-		<version>2.0-beta1</version>
-	</dependency>
-	<dependency>
-		<groupId>velocity-tools</groupId>
-		<artifactId>velocity-tools-view</artifactId>
-		<version>2.0-beta1</version>
-	</dependency>
 	<!-- xml解析工具 -->
 	<dependency>
 		<groupId>commons-digester</groupId>
