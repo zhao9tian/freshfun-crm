@@ -39,5 +39,10 @@ public interface WithdrawService {
      */
     Integer modifiedStatusAndReason(String rejectReason , String id);
 
-
+    /**
+     * 根据提现Id查询提现记录
+     * @param withdrawId
+     * @return
+     */
+    WithdrawPOJO queryWithdrawPOJOById(String withdrawId);
 }

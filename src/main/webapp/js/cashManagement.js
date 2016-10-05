@@ -8,7 +8,7 @@ $('.copy').click(function() {
 window.onload = function(){
 	$.ajax({
 		type:"post",
-		url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+		url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 		dataType:'JSON',
 		contentType: 'application/json;charset=utf-8',
 		data:JSON.stringify({
@@ -49,7 +49,7 @@ window.onload = function(){
 			console.log('全部');
 			$.ajax({
 				type:"post",
-				url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+				url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 				dataType:'JSON',
 				contentType: 'application/json;charset=utf-8',
 				data:JSON.stringify({
@@ -83,7 +83,7 @@ window.onload = function(){
 			console.log('待处理');
 			$.ajax({
 				type:"post",
-				url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+				url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 				dataType:'JSON',
 				contentType: 'application/json;charset=utf-8',
 				data:JSON.stringify({
@@ -117,7 +117,7 @@ window.onload = function(){
 			console.log('已处理');
 			$.ajax({
 				type:"post",
-				url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+				url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 				dataType:'JSON',
 				contentType: 'application/json;charset=utf-8',
 				data:JSON.stringify({
@@ -150,7 +150,7 @@ window.onload = function(){
 			console.log('已驳回')
 			$.ajax({
 				type:"post",
-				url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+				url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 				dataType:'JSON',
 				contentType: 'application/json;charset=utf-8',
 				data:JSON.stringify({
@@ -189,7 +189,7 @@ window.onload = function(){
 function addOrder(p){
 	$.ajax({
 		type:"post",
-		url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+		url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 		dataType:'JSON',
 		contentType: 'application/json;charset=utf-8',
 		data:JSON.stringify({
@@ -227,7 +227,7 @@ function addOrder(p){
 						console.log(id);
 						$.ajax({
 							type:"get",
-							url:"http://118.178.87.165:8080/freshfun-crm//withdraw/toHandled.do?operation=10&id="+id,
+							url:"http://118.178.87.165:8080/freshfun-crm/withdraw/toHandled.do?operation=10&id="+id,
 							dataType:'JSON',
 							success:function(data){
 								console.log(data);
@@ -251,7 +251,7 @@ function addOrder(p){
 							console.log(id);
 							$.ajax({
 								type:"get",
-								url:"http://118.178.87.165:8080/freshfun-crm//withdraw/toReject.do?operation=20&id="+id+"&rejectReason="+rejectReason,
+								url:"http://118.178.87.165:8080/freshfun-crm/withdraw/toReject.do?operation=20&id="+id+"&rejectReason="+rejectReason,
 								dataType:'JSON',
 								success:function(data){
 									console.log(data);
@@ -282,7 +282,7 @@ function addOrder(p){
 function pending(p){
 	$.ajax({
 		type:"post",
-		url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+		url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 		dataType:'JSON',
 		contentType: 'application/json;charset=utf-8',
 		data:JSON.stringify({
@@ -320,7 +320,7 @@ function pending(p){
 						console.log(id);
 						$.ajax({
 							type:"get",
-							url:"http://118.178.87.165:8080/freshfun-crm//withdraw/toHandled.do?operation=10&id="+id,
+							url:"http://118.178.87.165:8080/freshfun-crm/withdraw/toHandled.do?operation=10&id="+id,
 							dataType:'JSON',
 							success:function(data){
 								console.log(data);
@@ -344,7 +344,7 @@ function pending(p){
 							console.log(id);
 							$.ajax({
 								type:"get",
-								url:"http://118.178.87.165:8080/freshfun-crm//withdraw/toReject.do?operation=20&id="+id+"&rejectReason="+rejectReason,
+								url:"http://118.178.87.165:8080/freshfun-crm/withdraw/toReject.do?operation=20&id="+id+"&rejectReason="+rejectReason,
 								dataType:'JSON',
 								success:function(data){
 									console.log(data);
@@ -374,7 +374,7 @@ function pending(p){
 function processed(p){
 	$.ajax({
 		type:"post",
-		url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+		url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 		dataType:'JSON',
 		contentType: 'application/json;charset=utf-8',
 		data:JSON.stringify({
@@ -412,7 +412,7 @@ function processed(p){
 function rejected(p){
 	$.ajax({
 		type:"post",
-		url:"http://118.178.87.165:8080/freshfun-crm//withdraw/queryWithdrawList.do",
+		url:"http://118.178.87.165:8080/freshfun-crm/withdraw/queryWithdrawList.do",
 		dataType:'JSON',
 		contentType: 'application/json;charset=utf-8',
 		data:JSON.stringify({

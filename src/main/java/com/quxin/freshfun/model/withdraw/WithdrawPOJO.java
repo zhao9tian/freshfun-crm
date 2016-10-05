@@ -24,6 +24,8 @@ public class WithdrawPOJO {
     private Long createDate;
     /**处理时间*/
     private Long updateDate;
+    /**提现来源*/
+    private Integer withdrawSource;
     /**是否已删除*/
     private Integer isDelete;
 
@@ -108,6 +110,14 @@ public class WithdrawPOJO {
         this.updateDate = updateDate;
     }
 
+    public Integer getWithdrawSource() {
+        return withdrawSource;
+    }
+
+    public void setWithdrawSource(Integer withdrawSource) {
+        this.withdrawSource = withdrawSource;
+    }
+
     public Integer getIsDelete() {
         return isDelete;
     }
@@ -116,20 +126,4 @@ public class WithdrawPOJO {
         this.isDelete = isDelete;
     }
 
-    @Override
-    public String toString() {
-        return "WithdrawPOJO{" +
-                "id='" + id + '\'' +
-                ", userId=" + userId +
-                ", withDrawPrice=" + withDrawPrice +
-                ", withDrawType='" + withDrawType + '\'' +
-                ", paymentAccount='" + paymentAccount + '\'' +
-                ", state=" + state +
-                ", dealPerson='" + dealPerson + '\'' +
-                ", handlerReason='" + handlerReason + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", isDelete=" + isDelete +
-                '}';
-    }
 }

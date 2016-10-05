@@ -32,4 +32,11 @@ public interface WithdrawMapper {
 	 * @return
 	 */
 	Integer updateToReject(Map<String , Object> map);
+
+	/**
+	 * 根据提现Id查询提现记录
+	 * @param withdrawId
+	 * @return
+	 */
+    WithdrawPOJO selectWithdrawById(String withdrawId);
 }

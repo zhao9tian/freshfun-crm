@@ -14,8 +14,4 @@
     <context:component-scan base-package="com.quxin.freshfun.service"></context:component-scan>
     <!-- 引入配置文件 -->
     <context:property-placeholder location="classpath*:config.properties"/>
-    
-    
-    <task:annotation-driven scheduler="myScheduler"/>
-    <task:scheduler id="myScheduler" pool-size="25"/>
 </beans>

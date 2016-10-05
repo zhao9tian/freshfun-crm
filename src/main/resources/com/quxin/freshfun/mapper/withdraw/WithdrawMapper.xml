@@ -36,6 +36,9 @@
         where id = #{id}
     </update>
 
-
+    <select id="selectWithdrawById" parameterType="java.lang.String" resultType="com.quxin.freshfun.model.withdraw.WithdrawPOJO">
+        select user_id as userId , withdraw_source as withdrawSource , withdraw_price as withdrawPrice from withdraw
+        where id = #{withdrawId}
+    </select>
 
 </mapper>

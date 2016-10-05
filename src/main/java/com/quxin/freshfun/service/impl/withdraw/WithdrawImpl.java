@@ -47,4 +47,9 @@ public class WithdrawImpl implements WithdrawService{
         return withdrawMapper.updateToReject(map);
     }
 
+    @Override
+    public WithdrawPOJO queryWithdrawPOJOById(String withdrawId) {
+        return withdrawMapper.selectWithdrawById(withdrawId);
+    }
+
 }

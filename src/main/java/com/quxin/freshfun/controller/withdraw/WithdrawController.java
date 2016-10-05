@@ -1,8 +1,10 @@
 package com.quxin.freshfun.controller.withdraw;
 
+import com.quxin.freshfun.model.flow.FlowParam;
 import com.quxin.freshfun.model.withdraw.QueryContion;
 import com.quxin.freshfun.model.withdraw.WithdrawOutput;
 import com.quxin.freshfun.model.withdraw.WithdrawPOJO;
+import com.quxin.freshfun.service.flow.FlowService;
 import com.quxin.freshfun.service.withdraw.WithdrawService;
 import com.quxin.freshfun.utils.DateUtils;
 import com.quxin.freshfun.utils.ResultUtil;
@@ -11,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,6 +31,8 @@ public class WithdrawController {
 
     @Autowired
     private WithdrawService withdrawService;
+    @Autowired
+    private FlowService flowService;
 
     /**
      * 根据查询条件分页查询
@@ -110,14 +115,26 @@ public class WithdrawController {
      */
     @RequestMapping(value = "/toHandled" , method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> toHandled(String operation,String id , String currentPage) {
+    public Map<String, Object> toHandled(String operation,String id) {
         Map<String, Object> reultMap = null;
         if (operation != null && "10".equals(operation)) {
             Integer record = withdrawService.modifiedStatus(id);
             if (record == null || record == 0) {
                 reultMap = ResultUtil.fail(1004, "没有id为:" + id + "的数据");
             } else {
-                reultMap = ResultUtil.success(1);
+                //退款成功将流水记录到flow表里
+                WithdrawPOJO withdrawPOJO = withdrawService.queryWithdrawPOJOById(id);
+                FlowParam flowParam = new FlowParam();
+                flowParam.setUserId(withdrawPOJO.getUserId());
+                if(withdrawPOJO.getWithdrawSource() == 10){
+                    flowParam.setFetcherFlow(-withdrawPOJO.getWithDrawPrice());
+                }
+                if(withdrawPOJO.getWithdrawSource() == 20){
+                    flowParam.setAgentFlow(-withdrawPOJO.getWithDrawPrice());
+                }
+                flowParam.setCreated(System.currentTimeMillis()/1000);
+                flowParam.setUpdated(System.currentTimeMillis()/1000);
+                reultMap = ResultUtil.success(flowService.add(flowParam));
             }
         } else {
             reultMap = ResultUtil.fail(1004, "操作指定不正确");
@@ -133,12 +150,20 @@ public class WithdrawController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/toReject" , method = RequestMethod.GET )
+    @RequestMapping(value = "/toReject" , method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> toReject(String operation, String rejectReason, String id) {
         Map<String, Object> reultMap = null;
         if (operation != null && "20".equals(operation)) {
-            Integer record = withdrawService.modifiedStatusAndReason(rejectReason, id);
+            String str = "";
+            if(rejectReason != null && !"".equals(rejectReason)){
+                try {
+                    str= new String(rejectReason.getBytes("iso-8859-1"), "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+            Integer record = withdrawService.modifiedStatusAndReason(str, id);
             if (record == null || record == 0) {
                 reultMap = ResultUtil.fail(1004, "没有id为:" + id + "的数据");
             } else {

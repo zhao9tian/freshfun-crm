@@ -37,13 +37,13 @@ public class WithDrawControllerTest{
     }
     @Test
     public void toHandled() {
-//        System.out.println(withdrawController.toHandled("10" , "25"));
+        System.out.println(withdrawController.toHandled("10" , "40"));
     }
 
     @Test
     public void toReject() {
 //        System.out.println(goodsInfoController.goodsList(null));
-        System.out.println(withdrawController.toReject("20" ,"我不管111" ,"13"));
+        System.out.println(withdrawController.toReject("20" ,"你丑你别说话" ,"40"));
     }
 
 }
