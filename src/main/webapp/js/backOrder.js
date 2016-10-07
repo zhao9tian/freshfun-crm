@@ -290,6 +290,8 @@ function addOrder(p) {
 						orderState = '申请退款';
 					}else if(obj.orderStatus==20){
 						orderState = '已退款';
+					}else if(obj.orderStatus==100){
+						orderState = '交易完成';
 					}
 		    		
 		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>'+orderState+'</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
