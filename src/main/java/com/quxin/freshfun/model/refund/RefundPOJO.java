@@ -1,6 +1,8 @@
 package com.quxin.freshfun.model.refund;
 
-public class RefundPOJO {
+import com.quxin.freshfun.model.BaseEntity;
+
+public class RefundPOJO extends BaseEntity {
     private Integer id;
 
     private String orderDetailsId;
@@ -13,11 +15,6 @@ public class RefundPOJO {
 
     private String returnDes;
 
-    private Long gmtCreate;
-
-    private Long gmtModified;
-
-    private Integer isDelete;
 
     public Integer getId() {
         return id;
@@ -65,29 +62,5 @@ public class RefundPOJO {
 
     public void setReturnDes(String returnDes) {
         this.returnDes = returnDes == null ? null : returnDes.trim();
-    }
-
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
     }
 }

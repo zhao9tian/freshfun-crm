@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.quxin.freshfun.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ import com.quxin.freshfun.service.refund.RefundService;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+
+
 	@Autowired
 	private OrderDetailsService orderService;
 
@@ -40,44 +43,16 @@ public class OrderController {
 		IMAGEIP = value;
 	}
 
-	@RequestMapping("/orderList")
-	public String orderList(HttpServletRequest request) {
-		String curPage = request.getParameter("curPage");
-		int pageSize = 5;
-		int countPage = 0;
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<OrderDetailsPOJO> detailListPage = orderService.findOrder(map);
-		if (detailListPage != null) {
-			int count = detailListPage.size();
-			countPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+	@RequestMapping("/getRefundOrders")
+	public Map<String,Object> orderList(String curPage) {
+		Map<String,Object> resultMap = new HashMap<String,Object>();
+		if(curPage==null||"".equals(curPage)){
+			resultMap= ResultUtil.fail(1004,"入参有误");
 		}
-		if (curPage == null) {
-			curPage = "1";
-		}
-		if (Integer.parseInt(curPage) > countPage) {
-			curPage = "" + countPage;
-			if(countPage == 0){
-				curPage = "1";
-			}
-		}
-		int begin = (Integer.parseInt(curPage) - 1) * pageSize;
-		map.put("pageSize", pageSize);
-		map.put("begin", begin);
-		List<OrderDetailsPOJO> detailList = orderService.findOrder(map);
-		request.setAttribute("detailList", detailList);
-		request.setAttribute("curPage", curPage);
-		request.setAttribute("countPage", ""+countPage);
-		request.setAttribute("IMAGEIP", IMAGEIP);
-		return "/order/orderDetailList";
-	}
+		/*refundService.queryRefundWithPage();*/
 
-	@RequestMapping("/toShowReason")
-	public String toShowReason(HttpServletRequest request) {
-		String orderDetailid = request.getParameter("orderDetailsId");
-		RefundPOJO refund = refundService.findRefundByDetailId(orderDetailid);
-		request.setAttribute("refund", refund);
-		request.setAttribute("orderDetailid", orderDetailid);
-		return "/order/retReason";
+
+		return resultMap;
 	}
 
 	@RequestMapping("/toSendGoods")
