@@ -255,7 +255,7 @@ $('#dealClose').click(function() {
 function addOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageOrderClose.do?currentPage="+p,
+		url:"https://freshfun365.com/FreshFun/selectBackstageOrders.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -276,21 +276,19 @@ function addOrder(p) {
 						orderSource = 'B端推广';
 					};
 					var orderState;
-					if(obj.orderStatus==0){
+					if(obj.orderStatus==10){
 						orderState = '等待付款';
-					}else if(obj.orderStatus==10){
-						orderState = '等待发货';
-					}else if(obj.orderStatus==20){
-						orderState = '待确认收货';
 					}else if(obj.orderStatus==30){
-						orderState = '已确认发货';
-					}else if(obj.orderStatus==40){
-						orderState = '待评价';
+						orderState = '等待发货';
 					}else if(obj.orderStatus==50){
+						orderState = '待确认收货';
+					}else if(obj.orderStatus==70 && obj.commentStatus == 0){
+						orderState = '待评价';
+					}else if(obj.orderStatus==70 && obj.commentStatus == 1){
 						orderState = '已评价';
-					}else if(obj.orderStatus==60){
+					}else if(obj.orderStatus==40){
 						orderState = '申请退款';
-					}else if(obj.orderStatus==70){
+					}else if(obj.orderStatus==20){
 						orderState = '已退款';
 					}
 		    		
@@ -559,7 +557,7 @@ function dealOverOrder(p) {
 						orderSource = 'B端推广';
 					};
 					var orderState = '';
-					if(obj.orderStatus==60){
+					if(obj.orderStatus==40){
 						orderState = '已申请售后';
 					}
 					
