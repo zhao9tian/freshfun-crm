@@ -29,7 +29,7 @@
 <br><br>
 <a href="backOrder.html">订单管理</a>
 <br><br>
-<a href="javascript:void(0)" onclick="sendGoods()">快递单号录入</a>
+<%--<a href="javascript:void(0)" onclick="sendGoods()">快递单号录入</a>--%>
 </div>
 
 </body>
