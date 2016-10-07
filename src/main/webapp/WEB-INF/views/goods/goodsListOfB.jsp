@@ -84,7 +84,13 @@
 	}
 
 	function seeProxy(phone){
-		Dialog.alert("代理人手机号为："+phone);
+		if(typeof(phone)=="undefined"){
+			Dialog.alert("代理人数据异常");
+		}else if(phone==null||phone==""){
+			Dialog.alert("代理人未绑定手机号");
+		}else{
+			Dialog.alert("代理人手机号为："+phone);
+		}
 	}
 
 	/**
