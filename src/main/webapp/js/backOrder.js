@@ -1,6 +1,8 @@
 //页码
 var p=1;
 
+var pageType=0;
+
 var imgUrl = 'http://pic1.freshfun365.com';
 //总的页码数
 //全部总页码数
@@ -17,6 +19,7 @@ var waitingDeliveryTotalCount;
 window.onload = function() {
 	$('#all').click(function() {
 		console.log('全部');
+		pageType=0;
 		$("tbody").html("");
 		//加载全部第一页
 		$.ajax({
@@ -31,8 +34,10 @@ window.onload = function() {
 						pageCount: allTotalCount,
 						current: 1,
 						backFn: function(p) {
-							console.log(p);
-							addOrder(p);
+							if(pageType==0){
+								console.log("加载全部订单，页数："+p);
+								addOrder(p);
+							}
 						}
 					});
 		    	}else if(DATA.status.code == '1004'){
@@ -60,6 +65,7 @@ $('.tab').pignoseTab({
 //点击等待付款
 $('#waitingPayment').click(function() {
 	console.log('等待付款');
+	pageType=1;
 	$("tbody").html("");
 	//请求分页总数
 	$.ajax({
@@ -80,8 +86,10 @@ $('#waitingPayment').click(function() {
 						pageCount: waitingPaymentTotalCount,
 						current: 1,
 						backFn: function(p) {
-							console.log(p);
-							waitingPaymentOrder(p);
+							if(pageType==1){
+								console.log("加载待付款订单，页数："+p);
+								waitingPaymentOrder(p);
+							}
 						}
 					});
 		    	}
@@ -98,6 +106,7 @@ $('#waitingPayment').click(function() {
 //点击等待发货
 $('#waitingDelivery').click(function() {
 	console.log('等待发货');
+	pageType=2;
 	$("tbody").html("");
 	//请求分页总数
 	$.ajax({
@@ -118,8 +127,10 @@ $('#waitingDelivery').click(function() {
 						pageCount: waitingDeliveryTotalCount,
 						current: 1,
 						backFn: function(p) {
-							console.log(p);
-							waitingDeliveryOrder(p);
+							if(pageType==2){
+								console.log("加载待发货订单，页数："+p);
+								waitingDeliveryOrder(p);
+							}
 						}
 					});
 		    	}
@@ -136,7 +147,8 @@ $('#waitingDelivery').click(function() {
 })
 //点击等待确认收货
 $('#waitingConfirmDelivery').click(function() {
-	console.log('待确认收货')
+	console.log('待确认收货');
+	pageType=3;
 	$("tbody").html("");
 	//请求分页总数
 	$.ajax({
@@ -157,8 +169,10 @@ $('#waitingConfirmDelivery').click(function() {
 						pageCount: waitingConfirmDeliveryTotalCount,
 						current: 1,
 						backFn: function(p) {
-							console.log(p);
-							waitingConfirmDeliveryOrder(p);
+							if(pageType==3){
+								console.log("加载待收货订单，页数："+p);
+								waitingConfirmDeliveryOrder(p);
+							}
 						}
 					});
 		    	}
@@ -174,6 +188,7 @@ $('#waitingConfirmDelivery').click(function() {
 //点击交易完成
 $('#dealOver').click(function() {
 	console.log('交易完成');
+	pageType=4;
 	$("tbody").html("");
 	//请求分页总数
 	$.ajax({
@@ -194,8 +209,10 @@ $('#dealOver').click(function() {
 						pageCount: dealOverTotalCount,
 						current: 1,
 						backFn: function(p) {
-							console.log(p);
-							dealOverOrder(p);
+							if(pageType==4){
+								console.log("加载交易完成订单，页数："+p);
+								dealOverOrder(p);
+							}
 						}
 					});
 		    	}
@@ -212,6 +229,7 @@ $('#dealOver').click(function() {
 //点击交易关闭
 $('#dealClose').click(function() {
 	console.log('交易关闭');
+	pageType=5;
 	$("tbody").html("");
 	//请求分页总数
 	$.ajax({
@@ -232,8 +250,10 @@ $('#dealClose').click(function() {
 						pageCount: dealCloseTotalCount,
 						current: 1,
 						backFn: function(p) {
-							console.log(p);
-							dealCloseOrder(p);
+							if(pageType==5){
+								console.log("加载交易关闭订单，页数："+p);
+								dealCloseOrder(p);
+							}
 						}
 					});
 		    	}
@@ -290,6 +310,8 @@ function addOrder(p) {
 						orderState = '申请退款';
 					}else if(obj.orderStatus==20){
 						orderState = '已退款';
+					}else if(obj.orderStatus==90){
+						orderState = '评价（暂用）';
 					}else if(obj.orderStatus==100){
 						orderState = '交易完成';
 					}
