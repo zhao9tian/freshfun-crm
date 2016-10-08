@@ -27,8 +27,8 @@
 		<form action="toAddGoods.do" id="addGoods"></form>
 		<input value="新增商品" type="button" onclick="addGoods()"/>
 				<input value="添加选中商品到分类" type="button" onclick="addGoodsTo(1)"/>
-				<input value="添加选中商品到专场" type="button" onclick="addGoodsTo(2)"/>
 				<input value="添加选中商品到专题" type="button" onclick="addGoodsTo(3)"/>
+				<input value="添加选中商品到专场" type="button" onclick="addGoodsTo(2)"/>
 				<input value="推送选中商品到B端" type="button" onclick="pushToB()"/>
 		</fieldset>
 		<fieldset>
