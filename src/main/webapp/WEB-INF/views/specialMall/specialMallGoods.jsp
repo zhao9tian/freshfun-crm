@@ -24,7 +24,7 @@ List<GoodsPOJO> goodsList = (List<GoodsPOJO>)request.getAttribute("list");
 	}
 </style>
 </head>
-<%@ include file="../head.jsp" %>
+<jsp:include page="../head.jsp" />
 <body>
 <fieldset>
 		 	<legend><font style="color: red">²Ù×÷</font></legend>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,17 +17,21 @@ a {
 			align="center" style="background-color: #b9d8f3;">
 			<tr
 				style="text-align: center; COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-				<td colspan="7"><h2>Wellcome&nbsp;FreshFun&nbsp;Manager</h2></td>
+				<td colspan="7"><h2>欢迎使用悦选后台管理系统</h2></td>
 			</tr>
 			<tr
 				style="text-align: center; COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
-				<td><a href="${pageContext.request.contextPath}/goodsList.do">Goods Manager</a></td>
+				<td><a href="${pageContext.request.contextPath}/goodsList.do">商品管理</a></td>
 				<td><a
-					href="${pageContext.request.contextPath}/goodstype/getGoodsTypeList.do">Type Manager</a></td>
+					href="${pageContext.request.contextPath}/goodstype/getGoodsTypeList.do">分类管理</a></td>
 				<td><a
-					href="${pageContext.request.contextPath}/specialThemeIndex.do">SpecialTheme Manager</a></td>
+					href="${pageContext.request.contextPath}/specialThemeIndex.do">专题管理</a></td>
 				<td><a
-					href="${pageContext.request.contextPath}/specialMall/getSMList.do">Banner Manager</a></td>
+					href="${pageContext.request.contextPath}/specialMall/getSMList.do">专场管理</a></td>
+				<td><a
+						href="${pageContext.request.contextPath}/backOrder.html">订单管理</a></td>
+				<td><a
+						href="${pageContext.request.contextPath}/cashManagement.html">提现管理</a></td>
 			</tr>
 		</table>
 	</div>

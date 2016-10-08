@@ -20,7 +20,7 @@
 }
 </style>
 </head>
-<%@ include file="../head.jsp" %>
+<jsp:include page="../head.jsp" />
 <body>
 		<fieldset>
 		<legend><font style="color:red">Goods操作</font></legend>

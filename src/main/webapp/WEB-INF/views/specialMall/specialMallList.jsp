@@ -23,7 +23,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/dialog/zDialog.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/zDrag.js"></script>
 </head>
-<%@ include file="../head.jsp" %>
+<jsp:include page="../head.jsp" />
 <body>
 	<fieldset>
 		<legend><font style="color:red">Banner²Ù×÷</font></legend>

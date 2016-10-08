@@ -21,7 +21,7 @@
 <%SpecialThemePOJO st = (SpecialThemePOJO)request.getAttribute("st"); %>
 <title>专题编辑页</title>
 </head>
-<%@ include file="../head.jsp" %>
+<jsp:include page="../head.jsp" />
 <body>
 <fieldset>
 		 	<legend><font style="color: red">操作</font></legend>

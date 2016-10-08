@@ -21,7 +21,7 @@
 <%SpecialMallPOJO sm = (SpecialMallPOJO)request.getAttribute("sm"); %>
 <title>Banner编辑页</title>
 </head>
-<%@ include file="../head.jsp" %>
+<jsp:include page="../head.jsp" />
 <body>
 <fieldset>
 		 	<legend><font style="color: red">操作</font></legend>
