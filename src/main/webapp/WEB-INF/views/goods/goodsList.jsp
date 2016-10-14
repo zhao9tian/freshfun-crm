@@ -46,10 +46,11 @@
 			<table border="0" cellpadding="3" cellspacing="1" width="100%" align="center" style="background-color: #b9d8f3;">
 				<tr  style="text-align: center; COLOR: #0076C8; BACKGROUND-COLOR: #F4FAFF; font-weight: bold">
 					<th>选择</th>
+					<th>商品ID</th>
 					<th>商品名称</th>
 					<th>商品单价</th>
 					<th>商品标价</th>
-					<th>所属商户（id）</th>
+					<%--<th>所属商户（id）</th>--%>
 					<th>录入时间</th>
 					<th>修改时间</th>
 					<th>库存是否警报</th>
@@ -63,11 +64,15 @@
 				</tr>
 					<c:forEach items="${goodsList }" var="g" >
 						<tr bgcolor='#F4FAFF' style="text-align: center;">
-							<td><input type="checkbox" name="goodsId" value="${g.id }"/></td>
+							<td>
+                                <c:if test="${g.isOnSale ==1}"><input type="checkbox" name="goodsId" value="${g.id }"/></c:if>
+                                <c:if test="${g.isOnSale ==0}"><input type="checkbox" name="goodsId" value="${g.id }" disabled="disabled" /></c:if>
+                            </td>
+							<td>${g.id }</td>
 							<td>${g.goodsName }</td>
 							<td>${g.shopPriceString }</td>
 							<td>${g.marketPriceString }</td>
-							<td>${g.storeId }</td>
+							<%--<td>${g.storeId }</td>--%>
 							<td>${g.gmtCreateView }</td>
 							<td>${g.gmtModifiedView }</td>
 							<td>
@@ -92,8 +97,18 @@
 							</td>
 							<td><a href="toUpdateGoods.do?id=${g.id}">编辑</a></td>
 							<td><a href="javascript:void(0)" onclick="onsale(${g.id},${g.isOnSale})"><c:if test="${g.isOnSale ==1}">下架商品</c:if><c:if test="${g.isOnSale ==0}">上架商品</c:if></a></td>
-							<td><a href="javascript:void(0)" onclick="addToMall(${g.id})">加入Banner</a>&nbsp;<a href="javascript:void(0)" onclick="addToType(${g.id})">加入分类</a>
-							&nbsp;<a href="javascript:void(0)" onclick="addToTheme(${g.id})">加入专题</a>&nbsp;<a href="javascript:void(0)" onclick="addToActivity(${g.id})">加入活动</a></td>
+							<td>
+                                <c:if test="${g.isOnSale ==1}">
+                                    <a href="javascript:void(0)" onclick="addToType(${g.id})">加入分类</a>&nbsp;
+                                    <a href="javascript:void(0)" onclick="addToMall(${g.id})">加入Banner</a>&nbsp;
+                                    <a href="javascript:void(0)" onclick="addToTheme(${g.id})">加入专题</a>
+                                </c:if>
+                                <c:if test="${g.isOnSale ==0}">
+                                    <a href="javascript:void(0)" onclick="alert('该商品已下架')">加入分类</a>&nbsp;
+                                    <a href="javascript:void(0)" onclick="alert('该商品已下架')">加入Banner</a>&nbsp;
+                                    <a href="javascript:void(0)" onclick="alert('该商品已下架')">加入专题</a>
+                                </c:if>
+                            </td>
 						</tr>
 					</c:forEach>
 			</table>
@@ -104,7 +119,7 @@
 				第${page }页/共${totalPage }页
 			<a onClick='gotoPage(${page+1})' href="javascript:void(0)">下一页</a>
 			<a onclick='gotoPage(${totalPage})' href="javascript:void(0)" >尾页</a>
-			页面大小:<input style="width:20px" type="text" name="pageSize" value="${pageSize }"/>
+			页面大小:<input style="width:20px"  type="text" name="pageSize" value="${pageSize }"/>
 			共有${totalRecords }条数据
 			<a onclick='gotoPage($("#toPage").val())' href="javascript:void(0)">跳转到</a>
 			<input style="width:20px" id="toPage" value="${ page}">页</div>
@@ -112,6 +127,10 @@
 		</fieldset>
 </body>
 <script>
+//    function escSelect(){
+//        alert("该商品已下架，无法操作");
+//        $(this).attr("disabled", "disabled");
+//    }
 	function pushToB(){
 		var goodsInput = document.getElementsByName("goodsId");
 		var goods;
@@ -155,7 +174,7 @@
 				}
 			});
 		}else{
-			Dialog.alert("确认要上架吗？",function(){
+			Dialog.confirm("确认要上架吗？",function(){
 				$.ajax({
 					url:'updateIsOnSale.do?id='+goodsId+'&isOnSale='+isOnSale,
 					dataType:'json',
