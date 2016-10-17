@@ -3,7 +3,7 @@ var p=1;
 
 var pageType=0;
 
-var imgUrl = 'http://pic1.www.freshfun365.com';
+var imgUrl = 'http://pic1.freshfun365.com';
 //总的页码数
 //全部总页码数
 var allTotalCount;
@@ -101,7 +101,7 @@ $('#waitingPayment').click(function() {
 	    	alert('请求失败');
 	    }
 	});
-	
+
 })
 //点击等待发货
 $('#waitingDelivery').click(function() {
@@ -142,7 +142,7 @@ $('#waitingDelivery').click(function() {
 	    	alert('请求失败');
 	    }
 	});
-	
+
 
 })
 //点击等待确认收货
@@ -315,11 +315,11 @@ function addOrder(p) {
 					}else if(obj.orderStatus==100){
 						orderState = '交易完成';
 					}
-		    		
+
 		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>'+orderState+'</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
-		    	
+
 				$('tbody').html(order);
 				console.log(orderIdArr);
 				//备注
@@ -351,7 +351,7 @@ function addOrder(p) {
 				$('.btn-N').click(function() {
 					$('.remarkFrame').css('display','none');
 				});
-				
+
 	    	}else if(DATA.status.code == '1004'){
 	    		alert('请求失败');
 	    	};
@@ -360,7 +360,7 @@ function addOrder(p) {
 	    	alert('请求失败');
 	    }
 	});
-	
+
 }
 
 //加载等待付款订单信息
@@ -394,7 +394,7 @@ function waitingPaymentOrder(p) {
 		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>等待付款</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
-		    	
+
 				$('tbody').html(order);
 				//备注
 				$.each(orderIdArr, function(n,obj) {
@@ -442,7 +442,7 @@ function waitingDeliveryOrder(p) {
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    		fhOrderIdArr.push('.shipments'+obj.orderId);
 		    	});
-		    	
+
 				$('tbody').html(order);
 				$.each(orderIdArr, function(n,obj) {
 					$(orderIdArr[n]).click(function() {
@@ -450,15 +450,15 @@ function waitingDeliveryOrder(p) {
 						localStorage.setItem('orderId',orderIdArr[n]);
 					});
 				});
-				
-				
+
+
 				$.each(fhOrderIdArr, function(n,obj) {
 					$(fhOrderIdArr[n]).click(function() {
 						$('.shipmentsFrame').css('display','block');
 						localStorage.setItem('fhOrderId',fhOrderIdArr[n]);
 					});
 				});
-				
+
 				//确认
 				$('.sf-btn-Y').click(function(){
 					var orderId = localStorage.getItem('fhOrderId');
@@ -495,7 +495,7 @@ function waitingDeliveryOrder(p) {
 				$('.sf-btn-N').click(function() {
 					$('.shipmentsFrame').css('display','none');
 				});
-				
+
 	    	}else if(DATA.status.code == '1004'){
 	    		alert('请求失败');
 	    	};
@@ -504,9 +504,9 @@ function waitingDeliveryOrder(p) {
 	    	alert('请求失败');
 	    }
 	});
-	
 
-	
+
+
 
 }
 
@@ -537,7 +537,7 @@ function waitingConfirmDeliveryOrder(p) {
 		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th></th><th></th><th>'+orderSource+'</th><th></th><th>待确认收货</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
-		    	
+
 				$('tbody').html(order);
 				//备注
 				$.each(orderIdArr, function(n,obj) {
@@ -584,11 +584,11 @@ function dealOverOrder(p) {
 					if(obj.orderStatus==40){
 						orderState = '已申请售后';
 					}
-					
+
 		    		order += '<tr><th colspan="9"><div class="orderMsg"><span>订单编号：<i>'+obj.orderId+'</i></span><span></span><span>成交时间：<i>'+createDate+'</i></span><span>买家：<i>'+obj.name+'</i></span></div></th></tr><tr><th><dl><dt><img src="'+imgUrl+obj.goods.goodsImg+'"/></dt><dd><h4>'+obj.goods.goodsName+'</h4><h5>'+obj.goods.goodsDes+'</h5><h6>规格：默认</h6></dd></dl></th><th>￥<i>'+obj.goods.marketMoney+'</i></th><th>'+obj.count+'</th><th>'+orderState+'</th><th></th><th>'+orderSource+'</th><th></th><th>交易完成</th><th><h5 class="remark remark'+obj.orderId+'">备注</h5><h5 class="shipments"></h5></th></tr><tr><th colspan="9" class="addressMsg"><span>收货信息：<i>'+obj.name+'</i>，<i>'+obj.tel+'</i>，<i id="addressDetail">'+obj.city+obj.address+'</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="copy"></i></span></th></tr>';
 		    		orderIdArr.push('.remark'+obj.orderId);
 		    	});
-		    	
+
 				$('tbody').html(order);
 				//备注
 				$.each(orderIdArr, function(n,obj) {
@@ -597,7 +597,7 @@ function dealOverOrder(p) {
 						localStorage.setItem('orderId',orderIdArr[n]);
 					});
 				});
-				
+
 	    	}else if(DATA.status.code == '1004'){
 	    		alert('请求失败');
 	    	};
