@@ -95,7 +95,14 @@
 								<c:if test="${g.isPromote ==1}">是</c:if>
 								<c:if test="${g.isPromote ==0}">否</c:if>
 							</td>
-							<td><a href="toUpdateGoods.do?id=${g.id}">编辑</a></td>
+							<td>
+								<c:if test="${g.isOnSale ==1}">
+									<a href="toUpdateGoods.do?id=${g.id}">编辑</a>
+								</c:if>
+								<c:if test="${g.isOnSale ==0}">
+									<a href="javascript:void(0)"  onclick="alert('该商品下架,无法进行编辑')">编辑</a>&nbsp;
+								</c:if>
+							</td>
 							<td><a href="javascript:void(0)" onclick="onsale(${g.id},${g.isOnSale})"><c:if test="${g.isOnSale ==1}">下架商品</c:if><c:if test="${g.isOnSale ==0}">上架商品</c:if></a></td>
 							<td>
                                 <c:if test="${g.isOnSale ==1}">

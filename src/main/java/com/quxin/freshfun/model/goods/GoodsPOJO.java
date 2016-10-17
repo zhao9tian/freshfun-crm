@@ -84,17 +84,6 @@ public class GoodsPOJO {
         this.id = id;
     }
 
-//    public String getGmtCreate() {
-//    	String gmtCreateString = null;
-//    	if(gmtCreate!=null){
-//    		try {
-//    			gmtCreateString = DateUtils.longToString(gmtCreate*1000, "yyyy-MM-dd HH:mm:ss");
-//    		} catch (ParseException e) {
-//    			e.printStackTrace();
-//    		}
-//    	}
-//        return gmtCreateString;
-//    }
     public Long getGmtCreate() {
 		return gmtCreate;
 	}
@@ -103,19 +92,6 @@ public class GoodsPOJO {
 		this.gmtCreate = gmtCreate;
 	}
 
-
-//    public String getGmtModified() {
-//    	String gmtModifiedString = null;
-//    	if(gmtModified != null){
-//    		try {
-//    			gmtModifiedString = DateUtils.longToString(gmtModified*1000, "yyyy-MM-dd HH:mm:ss");
-//    		} catch (ParseException e) {
-//    			e.printStackTrace();
-//    		}
-//    	}
-//        return gmtModifiedString;
-//    }
-	
 	public Long getGmtModified() {
 		return gmtModified;
 	}

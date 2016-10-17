@@ -13,21 +13,21 @@
       
       
       <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
-   <bean id="mappingJacksonHttpMessageConverter"  
-        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
-        <property name="supportedMediaTypes">  
+   <bean id="mappingJacksonHttpMessageConverter"
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
             <list>
                 <value>text/html;charset=utf-8</value>
                 <value>text/plain;charset=utf-8</value>
                 <value>text/json;charset=utf-8</value>
                 <value>application/json;charset=utf-8</value>
-            </list>  
+            </list>
         </property>
     </bean>
-    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->  
-    <bean  
-        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
-        <property name="messageConverters">  
+    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+    <bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
             <list>
                 <ref bean="mappingJacksonHttpMessageConverter"/>
             </list>

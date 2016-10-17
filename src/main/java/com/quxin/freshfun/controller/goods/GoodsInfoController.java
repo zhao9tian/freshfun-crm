@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.quxin.freshfun.model.user.UsersPOJO;
+import com.quxin.freshfun.utils.OSSUtils;
+import com.quxin.freshfun.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import com.quxin.freshfun.service.goods.GoodsService;
 import com.quxin.freshfun.service.goods.GoodsTypeService;
 import com.quxin.freshfun.utils.DateUtils;
 import com.quxin.freshfun.utils.UploadUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping("/")
@@ -575,12 +579,9 @@ public class GoodsInfoController {
 			Double marketPriceD = Double.parseDouble(goods.getMarketPriceString())*100;
 			goods.setMarketPrice(marketPriceD.intValue());
 
-			//商户id,代理id
-			//goods.setStoreId(0);
-			//goods.setMerchantProxyId(0l);
 			//默认上架
 			goods.setIsOnSale((byte)1);
-			Integer goodsId = goodsService.addGoods(goods, gm,goodsTypeIds);
+			goodsService.addGoods(goods, gm,goodsTypeIds);
 			//6.处理精选图片
 //			try {
 //				Map<String, Object> goodsSelcetMap = new HashMap<>();
@@ -596,10 +597,12 @@ public class GoodsInfoController {
 //				e.printStackTrace();
 //			}
 		}
-		return "redirect:goodsList.do";
+		return "redirect:https://www.freshfun365.com/freshfun-crm/goodsList.do";
 	}
-	
-	
+
+
+
+
 	/**
 	 * 保存商品信息
 	 * @param request
@@ -699,12 +702,12 @@ public class GoodsInfoController {
 		String title = request.getParameter("title");
 		String titleDes = request.getParameter("titleDes");
 		String editer = request.getParameter("editer");
-		
+
 		String des = title+"@`"+titleDes+"@`"+editer;
 		gm.setDes(des);
-		
+
 		goodsService.updateGoods(goods, gm,goodsTypeIds);
-		return "redirect:goodsList.do";
+		return "redirect:https://www.freshfun365.com/freshfun-crm/goodsList.do";
 	}
 
 
@@ -719,7 +722,7 @@ public class GoodsInfoController {
 		String goodsName = req.getParameter("goodsName");
 		String storeId = req.getParameter("storeId");
 		String gmtCreate = req.getParameter("gmtCreate");
-		
+
 		if(goodsName != null && !"".equals(goodsName)){
 			map.put("goodsName", goodsName);
 		}
@@ -733,10 +736,10 @@ public class GoodsInfoController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return map;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/validateGoodsName")
 	public Map<String, Object> validateGoodsName(String goodsName, String id){
@@ -756,5 +759,28 @@ public class GoodsInfoController {
 		map.put("msg", message);
 		return map;
 	}
-	
+
+	@RequestMapping("/uploadPic")
+	@ResponseBody
+	public Map<String , Object> upload(HttpServletRequest request) throws IOException {
+		String imgPath ="";
+		Map<String, Object> result = new HashMap<String , Object>();
+		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+		// 取得request中的所有文件名
+		Iterator<String> iter = multiRequest.getFileNames();
+		while(iter.hasNext()){
+			MultipartFile file = multiRequest.getFile(iter.next());
+			//匹配上传的是哪张图片
+			if(!"".equals(file.getOriginalFilename())){
+				//更改上传文件的名称--时间戳,以免因为文件名重复而覆盖相同文件名的文件,不保留原名
+				String picName = file.getOriginalFilename();
+				String editFileName = UUID.randomUUID()+picName.substring(picName.lastIndexOf("."), picName.length());
+				String path = UploadUtils.createDirs() +"/"+ editFileName;
+				imgPath = OSSUtils.uploadPic(file.getInputStream(),path);
+				break;
+			}
+		}
+		result = ResultUtil.success(imgPath);
+		return result;
+	}
 }

@@ -133,34 +133,6 @@
 				<font style="color: red">商品详细信息</font>	
 			</legend>
 			<table rules="all" border="1" style="width:100%">
-				<!-- <tr>
-					<td width="12%">送货数量/次</td>
-					<td width="20%"><input type="number" name="goodsUnit" /></td>
-					<td width="15%">商品品牌</td>
-					<td width="15%"><input type="text" name="goodsBrand" /></td>
-					<td width="15%">商品规格</td>
-					<td width="15%"><input type="text" name="goodsSize" /></td>
-				</tr>
-				<tr>
-					<td>商品产地</td>
-					<td><input type="text" name="goodsPlace" /></td>
-					<td>储存方法</td>
-					<td><input type="text" name="storageMethod" /></td>
-					<td>快递信息</td>
-					<td><input type="text" name="goodsDelivery" /></td>
-				</tr>
-				<tr>
-					<td>服务信息</td>
-					<td><input type="text" name="goodsService" /></td>
-					<td>生产日期</td>
-					<td>
-					<input class="Wdate" type="text" onClick="WdatePicker()" name="pickBirthdate" >
-					</td>
-					<td>保质期</td>
-					<td>
-						<input class="Wdate" type="text" onClick="WdatePicker()" name="pickOutdate" > 
-					</td>
-				</tr>  -->
 				<tr>
 					<td rowspan="4">商品详情描述</td>
 					<td rowspan="1" colspan="5">
@@ -181,7 +153,7 @@
 				<tr>
 					<td><label>规格图片:(必填)</label></td>
 					<td colspan="5">
-						<input type="file" name="standardImg" required><font style="color:red">没有图片,商品详情无法显示</font>
+						<input type="file" name="standardImg" required>
 					</td>
 				</tr>
 				<tr>

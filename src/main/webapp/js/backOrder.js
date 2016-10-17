@@ -3,7 +3,7 @@ var p=1;
 
 var pageType=0;
 
-var imgUrl = 'http://pic1.freshfun365.com';
+var imgUrl = 'http://pic1.www.freshfun365.com';
 //总的页码数
 //全部总页码数
 var allTotalCount;
@@ -24,7 +24,7 @@ window.onload = function() {
 		//加载全部第一页
 		$.ajax({
 			type:"get",
-			url:"https://freshfun365.com/FreshFun/selectBackstageOrdersCount.do",
+			url:"https://www.freshfun365.com/FreshFun/selectBackstageOrdersCount.do",
 		    success:function(DATA){
 		    	console.log(JSON.parse(DATA));
 			    var DATA = JSON.parse(DATA);
@@ -70,7 +70,7 @@ $('#waitingPayment').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstagePendingPaymentOrderCount.do",
+		url:"https://www.freshfun365.com/FreshFun/selectBackstagePendingPaymentOrderCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -111,7 +111,7 @@ $('#waitingDelivery').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitDeliverOrderCount.do",
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageAwaitDeliverOrderCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -153,7 +153,7 @@ $('#waitingConfirmDelivery').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitGoodsReceiptCount.do",
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageAwaitGoodsReceiptCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -193,7 +193,7 @@ $('#dealOver').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectFinishOrderCount.do",
+		url:"https://www.freshfun365.com/FreshFun/selectFinishOrderCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -234,7 +234,7 @@ $('#dealClose').click(function() {
 	//请求分页总数
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageOrderCloseCount.do",
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageOrderCloseCount.do",
 	    success:function(DATA){
 	    	console.log(JSON.parse(DATA));
 		    var DATA = JSON.parse(DATA);
@@ -275,7 +275,7 @@ $('#dealClose').click(function() {
 function addOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageOrders.do?currentPage="+p,
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageOrders.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -339,7 +339,7 @@ function addOrder(p) {
 					alert('已备注');
 					$.ajax({
 						type:"get",
-						url:"https://freshfun365.com/FreshFun/orderRemark.do?orderId="+orderId+'&remark='+remark,
+						url:"https://www.freshfun365.com/FreshFun/orderRemark.do?orderId="+orderId+'&remark='+remark,
 						success:function(data){
 							console.log(JSON.parse(data));
 						}
@@ -367,7 +367,7 @@ function addOrder(p) {
 function waitingPaymentOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstagePendingPaymentOrder.do?currentPage="+p,
+		url:"https://www.freshfun365.com/FreshFun/selectBackstagePendingPaymentOrder.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -417,7 +417,7 @@ function waitingPaymentOrder(p) {
 function waitingDeliveryOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitDeliverOrder.do?currentPage="+p,
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageAwaitDeliverOrder.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -471,7 +471,7 @@ function waitingDeliveryOrder(p) {
 					alert('已发货');
 					$.ajax({
 						type:"post",
-						url:"https://freshfun365.com/FreshFun/selectFinishOrderCount.do",
+						url:"https://www.freshfun365.com/FreshFun/selectFinishOrderCount.do",
 						dataType: 'JSON',
                 		contentType: 'application/json;charset=utf-8',
 						data:JSON.stringify({
@@ -514,7 +514,7 @@ function waitingDeliveryOrder(p) {
 function waitingConfirmDeliveryOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageAwaitGoodsReceipt.do?currentPage="+p,
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageAwaitGoodsReceipt.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -560,7 +560,7 @@ function waitingConfirmDeliveryOrder(p) {
 function dealOverOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectFinishOrder.do?currentPage="+p,
+		url:"https://www.freshfun365.com/FreshFun/selectFinishOrder.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },
@@ -612,7 +612,7 @@ function dealOverOrder(p) {
 function dealCloseOrder(p) {
 	$.ajax({
 		type:"get",
-		url:"https://freshfun365.com/FreshFun/selectBackstageOrderClose.do?currentPage="+p,
+		url:"https://www.freshfun365.com/FreshFun/selectBackstageOrderClose.do?currentPage="+p,
 		beforeSend: function() {
 	        $("tbody").html("");
 	    },

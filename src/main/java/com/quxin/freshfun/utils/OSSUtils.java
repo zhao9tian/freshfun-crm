@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * @author TuZl
  */
-class OSSUtils {
+public class OSSUtils {
     private static OSSClient client = null;
 
     static {
@@ -48,7 +48,7 @@ class OSSUtils {
      * @param remoteFilePath 服务器文件路径
      * @return 返回图片访问路径
      */
-    static String uploadPic(InputStream localFilePath, String remoteFilePath){
+    public static String uploadPic(InputStream localFilePath, String remoteFilePath){
         client.putObject("freshfunpic", remoteFilePath , localFilePath);
         return getUrl(remoteFilePath);
     }
