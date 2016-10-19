@@ -141,7 +141,7 @@ public class GoodsInfoController {
 		if(id!=-1){
 			goodsService.updateGoodsDown(id,modifyDate);
 		}
-		return "redirect:goodsList.do";
+		return "redirect:https://www.freshfun365.com/freshfun-crm/goodsList.do";
 	}
 	
 	/**

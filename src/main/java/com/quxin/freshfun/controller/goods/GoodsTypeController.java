@@ -175,7 +175,7 @@ public class GoodsTypeController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:getGoodsTypeList.do";
+		return "redirect:https://www.freshfun365.com/freshfun-crm/getGoodsTypeList.do";
 	}
 	
 	/**

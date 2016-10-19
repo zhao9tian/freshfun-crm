@@ -146,7 +146,7 @@ public class SpecialThemeController {
 			}
 		}
 
-		return "redirect:specialThemeIndex.do";
+		return "redirect:https://www.freshfun365.com/freshfun-crm/specialThemeIndex.do";
 	}
 	
 	@RequestMapping("/openOrStopSpecialTheme")

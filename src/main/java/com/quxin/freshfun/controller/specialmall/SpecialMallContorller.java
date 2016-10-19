@@ -184,7 +184,7 @@ public class SpecialMallContorller {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:getSMList.do";
+		return "redirect:https://www.freshfun365.com/freshfun-crm/specialMall/getSMList.do";
 	}
 	/**
 	 * 选择banner
